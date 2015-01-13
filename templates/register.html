@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Signup Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/signin.css">
+    <style>
+      .form-signin input[type="password"] {
+      margin-bottom: 10px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      }
+      body{
+      background-image: url("static/leaf_pattern.png");
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <form class="form-signin" role="form" method="POST">
+	<h1 class="form-signin-heading">Sign up</h1>
+	<hr>
+	{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	{% for message in messages %}
+	<div class="alert alert-info">
+	  {{message}}
+	</div>
+	{% endfor %}
+	{% endif %}
+	{% endwith %}
+	<input type="text" class="form-control" name="username" placeholder = "Username" autofocus>
+	<br>
+	<input type="password" class="form-control" name="password" placeholder = "Password">
+	<br>
+	<input type="text" class="form-control" name="emailaddress" placeholder = "Email Address">
+	<br>
+	Gender:
+	<select id="genders" class="form-control" name="gender">
+	  <option value = "male"> Male </option>
+	  <option value = "female"> Female </option>
+	</select>
+	<br>
+	Age:
+	<select id="ages" class="form-control" name="age">
+	  {% for ages in a %}
+	  <option value={{ages}}> {{ages}} </option>
+	  {% endfor %}
+	</select>
+	<br>
+	<br>
+	<br>
+	<button class="btn btn-lg btn-primary btn-block" type="submit" name="b" value="Register">Register</button>
+	<br>
+	Go back to log in:
+	<button class="btn btn-lg btn-default btn-block" type="submit" name="b" value="Login">Login</button>
+      </form>
+      {% block body %}
+      {% endblock %}
+    </div>
+  </body>
+</html>
