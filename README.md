@@ -1,9 +1,9 @@
 # leaf
 
-Tianshi Wang: Backend and Open Data Analysis (Leader) Github manager
-Brian Guo: API
-Chris Kim: Communication and Issues Manager
-David Liang: front end Javascript and HTML
+Tianshi Wang: Code Supervisor and Open Data Analysis (Leader) Github manager<br>
+Brian Guo: Backend Manager<br>
+Chris Kim: Communication and Issues Manager<br>
+David Liang: Front End Javascript and HTML<br>
 
 Tools
 Python CSS Flask Javascript API Mongo
