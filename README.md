@@ -1,7 +1,7 @@
 # leaf
 
 Tianshi Wang: Code Supervisor and Open Data Analysis (Leader) Github manager<br>
-Brian Guo: Backend Manager<br>
+Brian Guo: Assistant Code Supervisor<br>
 Chris Kim: Communication and Issues Manager<br>
 David Liang: Front End Javascript and HTML<br>
 
