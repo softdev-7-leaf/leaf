@@ -1,6 +1,6 @@
 # leaf
 
-Tianshi Wang: Leader and Open Data Analysis (Leader) Github manager<br>
+Tianshi Wang: Open Data Analysis (Leader) Github manager<br>
 Brian Guo: Code Supervisor<br>
 Chris Kim: Communication and Issues Manager<br>
 David Liang: Front End Javascript and HTML<br>
