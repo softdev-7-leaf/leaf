@@ -5,10 +5,10 @@ Brian Guo: Code Supervisor<br>
 Chris Kim: Communication and Issues Manager<br>
 David Liang: Front End Javascript and HTML<br>
 
-Tools
+Tools:
 Python CSS Flask Javascript API Mongo
 
-<b>leaf! The College Board for NYC public high schools. Register and log in with your account to explore high school trees. You can rate, review, and add yourself as a leaf to a tree! </b>
+<b>leaf! The niche for NYC public high schools. Register and log in with your account to explore high school trees. You can rate, review, and add yourself as a leaf to a tree! </b>
 
 The project uses open data from the Socrata Open Data API, and combines different statistics about every school.
 
