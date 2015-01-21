@@ -6,7 +6,12 @@ from urllib2 import urlopen
 
 app=Flask(__name__)
 app.secret_key = os.urandom(24)
-abc = urllib2.Request("https://data.cityofnewyork.us/resource/zt9s-n5aj.json")
+abc = urllib2.Request("https://data.cityofnewyork.us/resource/mreg-rk5p.json")
+text = urlopen(abc).read()
+schoolslist = json.load(text)
+dbn_codes = []
+for x in schoolslist:
+        dbn_codes.append(x['dbn'])
 #highschools= urlopen(request)
 #response = highschools.read()
 
@@ -63,6 +68,13 @@ def logout():
         flash("You've been logged out")
         session["username"] = ""
         return redirect(url_for("login"))
+
+@app.route('/school/<dbn>')
+def school(dbn = None):
+        if dbn in dbn_codes:
+                n = dbn_codes.index()
+                return render_template('school.html',dbn=name)
+
 
 if __name__=="__main__":
         app.debug = True
