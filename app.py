@@ -7,8 +7,9 @@ from urllib2 import urlopen
 app=Flask(__name__)
 app.secret_key = os.urandom(24)
 abc = urllib2.Request("https://data.cityofnewyork.us/resource/mreg-rk5p.json")
-text = urlopen(abc).read()
-schoolslist = json.load(text)
+text = urlopen(abc)
+text2 = text.read()
+schoolslist = json.loads(text2)
 dbn_codes = []
 for x in schoolslist:
         dbn_codes.append(x['dbn'])
@@ -72,8 +73,15 @@ def logout():
 @app.route('/school/<dbn>')
 def school(dbn = None):
         if dbn in dbn_codes:
-                n = dbn_codes.index()
-                return render_template('school.html',dbn=name)
+                longstring = ""
+                n = dbn_codes.index(dbn)
+                for x in schoolslist[n]:
+                        longstring = longstring + x +": "+ schoolslist[n][x] + "\n" 
+                #name = schoolslist[n]['printed_school_name']
+                #program_code = schoolslist[n]['program_code']
+                return render_template('schools.html',name=longstring) #program_code=program_code, dbn=dbn)
+        else:
+                render_template('user.html')
 
 
 if __name__=="__main__":
