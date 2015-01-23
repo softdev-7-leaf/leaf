@@ -20,9 +20,10 @@ CONCEPT: NICHE/COLLEGE BOARD FOR NYC HIGH SCHOOLS (PRIVATE AND PUBLIC)
 
 1/20/15 - API success! Now able to access data from NYC Open Data.
 
-1/21/15 - Plan to group data together using mongodb, and create a search method.
-Search method can be based on name, region, academic stats (such as sat score range), ratings, reviews, etc.
+1/23/15 - Finishing format for high school pages, with statistics, and possibly the option to have a list of high schools which the user can customize. Incorporate more APIs from OpenData.
 
-1/22/15 - 1/18/15 - Finishing format for high school pages, with statistics, options to rate and review, and possibly the option to have a list of high schools which the user can customize. Finish up register, login, and session.
+1/23/15 - Finish up register, login, and session.
 
-1/23/15 - Link to a server?
+1/24/15 - Allow users to rate and review high schools, and add schools to their list, or "tree."
+
+1/27/15 - Project is due!
