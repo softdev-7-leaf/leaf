@@ -1,0 +1,12 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <title> Welcome to Leaf! </title>
+    <!-- Bootstrap Core CSS -->
+    <link href="../static/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+    
+  </body>
+</html>

@@ -7,13 +7,12 @@
     <link href="../static/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="../static/simple-sidebar.css" rel="stylesheet">
     <link href="../static/custom.css" rel="stylesheet">
 
     <style>
       body { 
       padding-top: 50px; 
-      background-image: url("../static/waves.png")}
+      background-image: url("../static/paper.png")}
       hr {
       border: none;
       height: 1px;
@@ -38,47 +37,30 @@
 	  </div>
 	  <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="./home.html">Home</a></li>
-              <li><a href="#">About</a></li>
 	    </ul>
-	    <form class="navbar-form navbar-left" role="search">
-	      <div class="form-group">
-		<input type="text" class="form-control" placeholder="Search high schools...">
-	      </div>
-	      <button class="btn btn-info">
-		Go!
-              </button>
-            </form>
             <ul class="nav navbar-nav navbar-right">
-              <li class="active"><a href="./register.html">Register <span class="sr-only">(current)</span></a></li>
-              <li><a href="./login.html/">Log in </a></li>
+              <li class="active"><a href="#">Personal Profile <span class="sr-only">(current)</span></a></li>
             </ul>
 	  </div><!--/.nav-collapse -->
 	</div><!--/.container -->
       </nav>
-      <div id="sidebar-wrapper">
-	<ul class="sidebar-nav">
-	  <li class="sidebar-brand">
-            <a href="#">
-              {{name}}
-            </a>
-	  </li>>
-	  <li>
-            <a href="schools.html">Statistics</a>
-	  </li>
-	  <li>
-            <a href="schools.html">Ranking</a>
-	  </li>
-	</ul>
-      </div>
       <div class="container">
-	<h1> {{name}} ({{dbn}})</h1> 
-	Program: {{program_code}}
-	<br>
-	Reviews
-	<hr>
-	<br>
-	
+	<h2>
+          Look up 
+          <br>
+          high schools.
+	</h2>
+	<p>
+          Find high schools. Find their information. Compare them. Rate them. 
+	</p>	
+	<span class="input_form col-md-8 col-md-offset-2">
+	  <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for high schools..." name="q">
+            <div class="input-group-btn">
+              <button class="btn btn-success" type="submit">Search</button>
+            </div>
+          </div>
+	</span>
       </div>
       <div class="push"></div>
     </div>
@@ -90,3 +72,4 @@
     </div>
   </body>
 </html>
+
