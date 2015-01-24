@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <title> {{ name }} </title>
+    
+    <!-- Bootstrap Core CSS -->
+    <link href="../static/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../static/simple-sidebar.css" rel="stylesheet">
+    
+    <style>
+      body { 
+      padding-top: 50px; 
+      background-image: url("../static/waves.png")}
+    </style>
+  </head>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Leaf</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="./home.html">Home</a></li>
+          <li><a href="#">About</a></li>
+	</ul>
+	<form class="navbar-form navbar-left" role="search">
+	  <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search high schools...">
+	  </div>
+	  <button class="btn btn-info">
+            Go!
+          </button>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="./register.html">Register <span class="sr-only">(current)</span></a></li>
+          <li><a href="./login.html/">Log in </a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div><!--/.container -->
+  </nav>
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+        <a href="#">
+          Start Bootstrap
+        </a>
+      </li>
+      <li>
+        <a href="#">Dashboard</a>
+      </li>
+      <li>
+        <a href="#">Shortcuts</a>
+      </li>
+      <li>
+        <a href="#">Overview</a>
+      </li>
+      <li>
+        <a href="#">Events</a>
+      </li>
+      <li>
+        <a href="#">About</a>
+      </li>
+      <li>
+        <a href="#">Services</a>
+      </li>
+      <li>
+        <a href="#">Contact</a>
+      </li>
+    </ul>
+  </div>
+  <div class="container">
+  <h1> {{name}} </h1>
+  <h1> {{program_code}} </h1>
+  <h1> {{dbn}} </h1>
+  </div>
+  <footer class="footer">
+    <div class="container">
+      Created by Tyler Wang, Chris Kim, David Liang, and Brian Guo. Link to our github page: <a href="https://github.com/softdev-7-leaf/leaf">https://github.com/softdev-7-leaf/leaf</a>
+    </div>
+  </footer>
+</body>
+</html>
