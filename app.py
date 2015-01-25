@@ -33,7 +33,7 @@ schoolinfo.insert(schoolslist)
 def login():
 
         if request.method=="GET":
-                print urlopen(abc).read()
+                #print urlopen(abc).read()
                 return render_template("login.html")
                 #print response
         else:
@@ -86,12 +86,13 @@ def logout():
 @app.route('/school/<code>', methods=["GET","POST"])
 def school(code = None):
         if request.method == "GET":
-                print "YES!"  
-                print schoolinfo.find_one({"dbn": code})
+                session.clear()
+                #print "YES!"  
+                #print schoolinfo.find_one({"dbn": code})
                 a = schoolinfo.find_one({"dbn": code})
                 #print a     
                 if a != None:
-                        print "YES! 2--------------------------------"
+                        #print "YES! 2--------------------------------"
                         #name = schoolslist[n]['printed_school_name']
                         #program_code = schoolslist[n]['program_code']
                         return render_template('schools.html',name=a['printed_school_name']) #program_code=program_code, dbn=dbn)
@@ -99,8 +100,11 @@ def school(code = None):
                         return render_template('user.html')
         else:
                 field = request.form['searchbar']
-                #print field
-                results = []
+                print field
+                session.clear()
+                session['results'] = []
+                print "2.0"
+                print session['results']
                 n = schoolinfo.find({ "$or": [
                         {"printed_school_name": {"$regex": ".*" +field + ".*"}},
                         {"program_code":{"$regex": ".*" +field + ".*"}},
@@ -109,21 +113,35 @@ def school(code = None):
                         {"urls":{"$regex": ".*" +field + ".*"}},
                         {"borough":{"$regex": ".*" +field + ".*"}},
                         {"selection_method":{"$regex": ".*" +field + ".*"}},
-                        {"program_name":{"$regex": ".*" +field + ".*"}}]})
-                for x in n:
-                        if not x in results:
-                                results.append(x)
-                print "This is the array length" + str(len(results))
-                return render_template('search.html', results=results)
+                        {"program_name":{"$regex": ".*" +field + ".*"}}]},{"_id":0})
+                for x in n.limit(20):
+                        if not x in session['results']:
+                                session['results'].append(x)
+                                session.modified= True
+                session.modified = True
+                #print "This is the array length" + str(len(results))
+                print "3.0--------------------------------------------------"
+                print session['results']
+                return redirect(url_for("search"))
 
-#@app.route('/search/', methods=["GET","POST"])
-#def search():
- #       if request.method == "GET":
- #               resultslist = []
+@app.route('/search/', methods=["GET","POST"])
+def search(results=None):
+        print "4.0-----------------------------------------------------------"
+        print session['results']
+        if request.method == "GET":
+                print "GOT TO THIS STEP-----------------"
+                #results = request.args.get("results")
+                #for x in results:
+                        #print x
+                        #print "\n"
+                #print 'These are the session results'
+                #print escape(session['results'])
+                return render_template("search.html",results= session['results'])
 
 
 
 
 if __name__=="__main__":
+        app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
         app.debug = True
         app.run()
