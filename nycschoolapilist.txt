@@ -2,4 +2,6 @@ https://data.cityofnewyork.us/resource/zt9s-n5aj.json (SAT scores)
 https://data.cityofnewyork.us/resource/mreg-rk5p.json (Main Subject Area, School URL, Borough, Selection Method)
 https://data.cityofnewyork.us/resource/7z8d-msnt.json (Attendance Rate)
 https://data.cityofnewyork.us/resource/ffnc-f3aa.json (Basically Progress Report) 
+https://data.cityofnewyork.us/resource/vh2h-md7a.json (Graduation percentage Class of 2001-2005 data, including regents info)
+https://data.cityofnewyork.us/resource/itfs-ms3e.json (AP Information, woohoo)
 
