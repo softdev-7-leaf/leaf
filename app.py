@@ -4,6 +4,7 @@ import os, urllib2, json
 import pymongo
 from pymongo import MongoClient
 from urllib2 import urlopen
+from pymongo import Connection
 
 
 app=Flask(__name__)
@@ -13,8 +14,10 @@ text = urlopen(abc)
 text2 = text.read()
 schoolslist = json.loads(text2)
 dbn_codes = []
+c= Connection()
 client = MongoClient()
 db = client.leaf
+c.drop_database(db)
 schoolinfo=db.one
 schoolinfo.insert(schoolslist)
 
@@ -28,6 +31,7 @@ schoolinfo.insert(schoolslist)
 @app.route("/",methods=["GET","POST"])
 @app.route("/login",methods=["GET","POST"])
 def login():
+
         if request.method=="GET":
                 print urlopen(abc).read()
                 return render_template("login.html")
@@ -85,7 +89,7 @@ def school(code = None):
                 print "YES!"  
                 print schoolinfo.find_one({"dbn": code})
                 a = schoolinfo.find_one({"dbn": code})
-                print a     
+                #print a     
                 if a != None:
                         print "YES! 2--------------------------------"
                         #name = schoolslist[n]['printed_school_name']
@@ -95,17 +99,28 @@ def school(code = None):
                         return render_template('user.html')
         else:
                 field = request.form['searchbar']
-                print field
-                n = schoolinfo.find_one({ "$or": [
-                        {"printed_school_name":field},
-                        {"program_code":field},
-                        {"directory_page_":field},
-                        {"dbn":field},
-                        {"urls":field},
-                        {"borough":field},
-                        {"selection_method":field},
-                        {"program_name":field}]})
-                return render_template('schools.html', name= n['printed_school_name'])
+                #print field
+                results = []
+                n = schoolinfo.find({ "$or": [
+                        {"printed_school_name": {"$regex": ".*" +field + ".*"}},
+                        {"program_code":{"$regex": ".*" +field + ".*"}},
+                        {"directory_page_":{"$regex": ".*" +field + ".*"}},
+                        {"dbn":{"$regex": ".*" +field + ".*"}},
+                        {"urls":{"$regex": ".*" +field + ".*"}},
+                        {"borough":{"$regex": ".*" +field + ".*"}},
+                        {"selection_method":{"$regex": ".*" +field + ".*"}},
+                        {"program_name":{"$regex": ".*" +field + ".*"}}]})
+                for x in n:
+                        if not x in results:
+                                results.append(x)
+                print "This is the array length" + str(len(results))
+                return render_template('search.html', results=results)
+
+#@app.route('/search/', methods=["GET","POST"])
+#def search():
+ #       if request.method == "GET":
+ #               resultslist = []
+
 
 
 
