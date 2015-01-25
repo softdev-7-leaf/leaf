@@ -79,7 +79,7 @@ def logout():
         session["username"] = ""
         return redirect(url_for("login"))
 
-@app.route('/school/<code>')
+@app.route('/school/<code>', methods=["GET","POST"])
 def school(code = None):
         if request.method == "GET":
                 print "YES!"  
@@ -95,8 +95,17 @@ def school(code = None):
                         return render_template('user.html')
         else:
                 field = request.form['searchbar']
-                db.schoolinfo.find(field)
-                return render_template("user.html")
+                print field
+                n = schoolinfo.find_one({ "$or": [
+                        {"printed_school_name":field},
+                        {"program_code":field},
+                        {"directory_page_":field},
+                        {"dbn":field},
+                        {"urls":field},
+                        {"borough":field},
+                        {"selection_method":field},
+                        {"program_name":field}]})
+                return render_template('schools.html', name= n['printed_school_name'])
 
 
 
