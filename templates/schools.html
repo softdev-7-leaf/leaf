@@ -1,8 +1,16 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title> {{ name }} </title>
-    
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Simple Sidebar - Start Bootstrap Template</title>
+
     <!-- Bootstrap Core CSS -->
     <link href="../static/bootstrap.min.css" rel="stylesheet">
 
@@ -10,9 +18,17 @@
     <link href="../static/simple-sidebar.css" rel="stylesheet">
     <link href="../static/custom.css" rel="stylesheet">
 
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
     <style>
       body { 
       padding-top: 50px; 
+      padding-bottom: 50px;
       background-image: url("../static/waves.png")}
       hr {
       border: none;
@@ -22,71 +38,125 @@
       background-color: #333; /* Modern Browsers */
       }
     </style>
-  </head>
-  <body>
-    <div class="wrapper">
-      <nav class="navbar navbar-inverse navbar-fixed-top">
-	<div class="container">
-	  <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#"><font color="green">Leaf</font></a>
-	  </div>
-	  <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="./home.html">Home</a></li>
-              <li><a href="#">About</a></li>
-	    </ul>
-	    <form class="navbar-form navbar-left" role="search">
-	      <div class="form-group">
-		<input type="text" class="form-control" placeholder="Search high schools...">
-	      </div>
-	      <button class="btn btn-info">
-		Go!
-              </button>
-            </form>
-            <ul class="nav navbar-nav navbar-right">
-              <li class="active"><a href="./register.html">Register <span class="sr-only">(current)</span></a></li>
-              <li><a href="./login.html/">Log in </a></li>
-            </ul>
-	  </div><!--/.nav-collapse -->
-	</div><!--/.container -->
-      </nav>
-      <div id="sidebar-wrapper">
-	<ul class="sidebar-nav">
-	  <li class="sidebar-brand">
-            <a href="#">
-              {{name}}
-            </a>
-	  </li>>
-	  <li>
-            <a href="schools.html">Statistics</a>
-	  </li>
-	  <li>
-            <a href="schools.html">Ranking</a>
-	  </li>
-	</ul>
-      </div>
-      <div class="container">
-	<h1> {{name}} ({{dbn}})</h1> 
-	Program: {{program_code}}
-	<br>
-	Reviews
-	<hr>
-	<br>
-	
-      </div>
-      <div class="push"></div>
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+          <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+              <a href="#">
+                Start Bootstrap
+              </a>
+            </li>
+            <li>
+              <a href="#">Dashboard</a>
+            </li>
+            <li>
+              <a href="#">Shortcuts</a>
+            </li>
+            <li>
+              <a href="#">Overview</a>
+            </li>
+            <li>
+              <a href="#">Events</a>
+            </li>
+            <li>
+              <a href="#">About</a>
+            </li>
+            <li>
+              <a href="#">Services</a>
+            </li>
+            <li>
+              <a href="#">Contact</a>
+            </li>
+          </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-12">
+                
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+		  <div class="container">
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		      </button>
+		      <a class="navbar-brand" href="#"><font color="green">Leaf</font></a>
+		    </div>
+		    <div id="navbar" class="navbar-collapse collapse">
+		      <ul class="nav navbar-nav">
+			<li class="active"><a href="./home.html">Home</a></li>
+			<li><a href="#">About</a></li>
+		      </ul>
+		      <form class="navbar-form navbar-left" role="search">
+			<div class="form-group">
+			  <input type="text" class="form-control" placeholder="Search high schools...">
+			</div>
+			<button class="btn btn-info">
+			  Go!
+			</button>
+		      </form>
+		      <ul class="nav navbar-nav navbar-right">
+			<li class="active"><a href="./register.html">Register <span class="sr-only">(current)</span></a></li>
+			<li><a href="./login.html/">Log in </a></li>
+		      </ul>
+		    </div><!--/.nav-collapse -->
+		  </div><!--/.container -->
+		</nav>
+		Hide Menu: 
+		<br>
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+		<br>
+		<h1> {{name}} ({{dbn}})</h1> 
+		Program: {{program_code}}
+		<br>
+		Reviews
+		<hr>
+		<br>
+		<div class="push"></div>
+		
+		<div class="navbar navbar-inverse navbar-fixed-bottom">
+		  <div class="container">
+		    <p class="navbar-text">Created by Tyler Wang, Chris Kim, David Liang, and Brian Guo.</p>
+		    <a href="https://github.com/softdev-7-leaf/leaf" class="navbar-btn btn-success btn">https://github.com/softdev-7-leaf/leaf</a>
+		  </div>
+		</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
     </div>
-    <div class="footer">
-      <div class="container">
-	<hr>
-	Created by Tyler Wang, Chris Kim, David Liang, and Brian Guo. Link to our github page: <a href="https://github.com/softdev-7-leaf/leaf">https://github.com/softdev-7-leaf/leaf</a>
-      </div>
-    </div>
-  </body>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../js/bootstrap.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+      $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+      });
+    </script>
+
+</body>
+
 </html>

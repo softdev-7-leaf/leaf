@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <title> {{ name }} </title>
+    
+    <!-- Bootstrap Core CSS -->
+    <link href="../static/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../static/simple-sidebar.css" rel="stylesheet">
+    <link href="../static/custom.css" rel="stylesheet">
+
+    <style>
+      body { 
+      padding-top: 50px; 
+      background-image: url("../static/waves.png")}
+      hr {
+      border: none;
+      height: 1px;
+      /* Set the hr color */
+      color: #333; /* old IE */
+      background-color: #333; /* Modern Browsers */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+	  <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><font color="green">Leaf</font></a>
+	  </div>
+	  <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="./home.html">Home</a></li>
+              <li><a href="#">About</a></li>
+	    </ul>
+	    <form class="navbar-form navbar-left" role="search">
+	      <div class="form-group">
+		<input type="text" class="form-control" placeholder="Search high schools...">
+	      </div>
+	      <button class="btn btn-info">
+		Go!
+              </button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="active"><a href="./register.html">Register <span class="sr-only">(current)</span></a></li>
+              <li><a href="./login.html/">Log in </a></li>
+            </ul>
+	  </div><!--/.nav-collapse -->
+	</div><!--/.container -->
+      </nav>
+      <div id="sidebar-wrapper">
+	<ul class="sidebar-nav">
+	  <li class="sidebar-brand">
+            <a href="#">
+              {{name}}
+            </a>
+	  </li>>
+	  <li>
+            <a href="schools.html">Statistics</a>
+	  </li>
+	  <li>
+            <a href="schools.html">Ranking</a>
+	  </li>
+	</ul>
+      </div>
+      <div class="container">
+	<h1> {{name}} ({{dbn}})</h1> 
+	Program: {{program_code}}
+	<br>
+	Reviews
+	<hr>
+	<br>
+	
+      </div>
+      <div class="push"></div>
+    </div>
+    <div class="footer">
+      <div class="container">
+	<hr>
+	Created by Tyler Wang, Chris Kim, David Liang, and Brian Guo. Link to our github page: <a href="https://github.com/softdev-7-leaf/leaf">https://github.com/softdev-7-leaf/leaf</a>
+      </div>
+    </div>
+  </body>
+</html>
