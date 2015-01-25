@@ -14,6 +14,12 @@ html, body {
     height: 155px; /* .push must be the same height as .footer */
 }
 
+.footer {
+    background: 
+    /* image to overlay */
+    url("china.png");
+}
+
 hr {
     border: none;
     height: 1px;
