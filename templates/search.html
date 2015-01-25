@@ -49,7 +49,12 @@
           Results for {{ Search }}
 	</h2>
       </div>
-      <div class="push"></div>
+      <div class="push">
+        <ul>{% for x in results %}
+          <li> <a href="./{{x['dbn']}}"> {{x["printed_school_name"]}}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
     </div>
     <div class="footer">
       <div class="container">
