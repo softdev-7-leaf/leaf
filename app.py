@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, session, escape, flash
 import database
 import os, urllib2, json
+import pymongo
+from pymongo import MongoClient
 from urllib2 import urlopen
 
 
@@ -11,8 +13,15 @@ text = urlopen(abc)
 text2 = text.read()
 schoolslist = json.loads(text2)
 dbn_codes = []
-for x in schoolslist:
-        dbn_codes.append(x['dbn'])
+client = MongoClient()
+db = client.leaf
+schoolinfo=db.one
+schoolinfo.insert(schoolslist)
+
+#for a in schoolslist:
+#        dbn_codes.append(a['dbn'])
+
+
 #highschools= urlopen(request)
 #response = highschools.read()
 
@@ -70,18 +79,25 @@ def logout():
         session["username"] = ""
         return redirect(url_for("login"))
 
-@app.route('/school/<dbn>')
-def school(dbn = None):
-        if dbn in dbn_codes:
-                longstring = ""
-                n = dbn_codes.index(dbn)
-                for x in schoolslist[n]:
-                        longstring = longstring + x +": "+ schoolslist[n][x] + "\n" 
-                #name = schoolslist[n]['printed_school_name']
-                #program_code = schoolslist[n]['program_code']
-                return render_template('schools.html',name=longstring) #program_code=program_code, dbn=dbn)
+@app.route('/school/<code>')
+def school(code = None):
+        if request.method == "GET":
+                print "YES!"  
+                print schoolinfo.find_one({"dbn": code})
+                a = schoolinfo.find_one({"dbn": code})
+                print a     
+                if a != None:
+                        print "YES! 2--------------------------------"
+                        #name = schoolslist[n]['printed_school_name']
+                        #program_code = schoolslist[n]['program_code']
+                        return render_template('schools.html',name=a['printed_school_name']) #program_code=program_code, dbn=dbn)
+                else:
+                        return render_template('user.html')
         else:
-                render_template('user.html')
+                field = request.form['searchbar']
+                db.schoolinfo.find(field)
+                return render_template("user.html")
+
 
 
 if __name__=="__main__":
