@@ -1,38 +1,30 @@
 * {
     margin: 0;
 }
-html, body {
+
+body {
     height: 100%;
     padding-top: 50px; 
-    background-image: url("/waves.png")
+    padding-bottom: 50px;
+    background-image: url("waves.png")
 }
 
-body { 
-      padding-top: 50px; 
-      padding-bottom: 50px;
-      background-image: url("../static/waves.png")}
 hr {
       border: none;
       height: 1px;
       /* Set the hr color */
       color: #333; /* old IE */
       background-color: #333; /* Modern Browsers */
-      }
+}
 
 .wrapper {
     min-height: 100%;
     height: auto !important;
     height: 100%;
-    margin: 0 auto -155px; /* the bottom margin is the negative value of the footer's height */
+    margin: 0 auto -200px; /* the bottom margin is the negative value of the footer's height */
 }
 .footer, .push {
-    height: 155px; /* .push must be the same height as .footer */
-}
-
-.footer {
-    background: 
-    /* image to overlay */
-    url("china.png");
+    height: 200px; /* .push must be the same height as .footer */
 }
 
 hr {
