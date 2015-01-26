@@ -247,7 +247,14 @@ def search(results=None):
         else:
             field = request.form['searchbar']
             return redirect(url_for("search", field=field))
-
+@app.route("/profile", methods=["GET","POST"])
+def profile():
+    if request.method=="GET":
+        return render_template("profile.html",username= session['username'],emailaddress= session['emailaddress'])
+    else:
+        if 'searchbar' in request.form:
+            field = request.form['searchbar']
+            return redirect(url_for("search", field=field))
 @app.route("/about", methods=["GET","POST"])
 def about():
     if request.method=="GET":
