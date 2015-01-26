@@ -9,7 +9,6 @@ from pymongo import Connection
 
 
 app=Flask(__name__)
-app.secret_key = os.urandom(24)
 abc = urllib2.Request("https://data.cityofnewyork.us/resource/mreg-rk5p.json")
 sat = urllib2.Request("https://data.cityofnewyork.us/resource/zt9s-n5aj.json")
 text = urlopen(abc)
@@ -95,16 +94,21 @@ def login():
                 password = request.form["password"]
                 button = request.form["b"]
                 if button == "Login":
-			user = users.find_one({'username': username})
-                        if user == None:
-                                flash("Not a Valid Username")
-                                return redirect(url_for('login'))
-			elif user['password'] != password:
-				flash("Password and username do not match")
-				return redirect(url_for('login'))
-			else:
-				flash("Welcome to Leaf")
-				return redirect(url_for('user_home', username=username))
+                    user = users.find_one({'username': username})
+                    if user == None:
+                        flash("Not a Valid Username")
+                        return redirect(url_for('login'))
+                    elif user['password'] != password:
+				        flash("Password and username do not match")
+				        return redirect(url_for('login'))
+                    else:
+                        flash("Welcome to Leaf")
+                        session['username'] = username
+                        print session['username']
+                        return redirect(url_for('user_home', username=username))
+                #flash("Welcome to leaf")
+				#flash("Welcome to Leaf")
+				#return redirect(url_for('user_home', username=username))
 		else: 
 			return redirect(url_for('register'))
 def add_user(username, password, emailaddress, gender) : #, age
@@ -165,6 +169,9 @@ def logout():
 @app.route("/home/<username>",methods=["GET","POST"])
 def user_home(username):
     if request.method == "GET":
+        session['username'] = username
+        print session['username']
+        session.modified=True
         return render_template("home.html", username=username)
     else:
         print "abc"
@@ -181,7 +188,6 @@ def user_home(username):
 @app.route('/school/<code>', methods=["GET","POST"])
 def school(code = None):
         if request.method == "GET":
-                session.clear()
                 #print "YES!"  
                 #print schoolinfo.find_one({"dbn": code})
                 a = schoolinfo2.find_one({"_id": code})
@@ -196,15 +202,15 @@ def school(code = None):
                                 critread=a['critical_reading_mean'],
                                 mathematics= a['mathematics_mean'],
                                 writing= a['writing_mean'],
-                                Interest= a['interest_area']) #program_code=program_code, dbn=dbn)
-                else:
-                        return render_template('user.html')
-        else:
+                                Interest= a['interest_area'],
+                                username=session['username']) #program_code=program_code, dbn=dbn)
+        else: 
                 field = request.form['searchbar']
                 return redirect(url_for("search", field=field ))
 
 @app.route('/search/', methods=["GET","POST"])
 def search(results=None):
+        print session['username']
         field = request.args.get('field')
         field2 = field.split(" ")
         #print field
@@ -238,14 +244,20 @@ def search(results=None):
                 #print "\n"
         #print 'These are the session results'
         #print escape(session['results'])
-                return render_template("search.html",results=results, Search="'"+field+"'")
+                return render_template("search.html",results=results, Search="'"+field+"'", username=session['username'])
         else:
             field = request.form['searchbar']
             return redirect(url_for("search", field=field))
 
-@app.route("/about")
+@app.route("/about", methods=["GET","POST"])
 def about():
-    return render_template("about.html")
+    if request.method=="GET":
+        print session['username']
+        return render_template("about.html", username= session['username'])
+    else:
+        if 'searchbar' in request.form:
+            field = request.form['searchbar']
+            return redirect(url_for("search", field=field))
 
 
 

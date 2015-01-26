@@ -29,10 +29,10 @@
         <div id="sidebar-wrapper">
           <ul class="sidebar-nav">
             <li class="sidebar-brand">
-              <a href="home.html">Leaf</a>
+              <a href="/home/{{username}}">Leaf</a>
 	    </li>
             <li>
-              <a href="about.html">What is Leaf?</a>
+              <a href="/about">What is Leaf?</a>
             </li>
             <li>
               <a href="https://github.com/softdev-7-leaf/leaf">Our Repo</a>
@@ -63,7 +63,7 @@
 		    </div>
 		    <div id="navbar" class="navbar-collapse collapse">
 		      <ul class="nav navbar-nav">
-			<li class="active"><a href="./home.html">Home</a></li>
+			<li class="active"><a href="/home/{{username}}">Home</a></li>
 			<li><a href="/about">About</a></li>
 		      </ul>
 		      <form class="navbar-form navbar-left" role="search">
@@ -76,7 +76,7 @@
 		      </form>
 		      <ul class="nav navbar-nav navbar-right">
 			<li class="active"><a href="./register.html">Register <span class="sr-only">(current)</span></a></li>
-			<li><a href="./login.html/">Log in </a></li>
+			<li><a href="/logout">Log out </a></li>
 		      </ul>
 		    </div><!--/.nav-collapse -->
 		  </div><!--/.container -->
@@ -130,7 +130,7 @@
 	  </div>
 	  <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="home.html">Home</a></li>
+              <li class="active"><a href="/home/{{username}}">Home</a></li>
               <li><a href="/about">About</a></li>
 	    </ul>
 	    <form class="navbar-form navbar-left" role="search" method="POST">
