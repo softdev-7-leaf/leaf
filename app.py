@@ -78,7 +78,7 @@ def digit(password):
             return True
     return False
 def validate_password(password):
-    return (len(password) >= 6) and (len(password) <= 8) and (upper(password)) and (lower(password)) and (digit(password))
+    return (len(password) >= 5) and (len(password) <= 21) and (upper(password)) and (lower(password)) and (digit(password))
 
 
 @app.route("/",methods=["GET","POST"])
@@ -97,7 +97,7 @@ def login():
                 if button == "Login":
 			user = users.find_one({'username': username})
                         if user == None:
-                                flash("Not a username buddy")
+                                flash("Not a Valid Username")
                                 return redirect(url_for('login'))
 			elif user['password'] != password:
 				flash("Password and username do not match")
@@ -137,7 +137,12 @@ def register():
 		if users.find_one({'emailaddress': emailaddress}) != None:
 			flash("The email you submitted already has an account tied to it, please try again.")
 			return redirect(url_for('register'))
-
+		if not validate_email(str(emailaddress)):
+			flash("This is not an email")
+			return redirect(url_for('register'))
+		if not validate_password(str(password)):
+			flash("The password does not meet the requirements: The length must be greater than 4 and less than 20, and have at least one digit, one uppercase letter and one lowercase letter.")
+			return redirect(url_for('register'))
 		add_user(username, password, emailaddress, gender) #, age
 		session['username'] = username
 		session['password'] = password
