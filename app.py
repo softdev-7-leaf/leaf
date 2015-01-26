@@ -271,11 +271,6 @@ def about():
             field = request.form['searchbar']
             return redirect(url_for("search", field=field))
 
-@app.route("/profile")
-def profile():
-    n = users.find_one({'username':session['username']})
-    return render_template("profile.html",username=session['username'], gender=n['gender'])
-
 
 
 
