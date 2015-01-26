@@ -1,9 +1,9 @@
 # leaf
 
 Tianshi Wang: Open Data Analysis (Leader) Github manager<br>
-Brian Guo: Code Supervisor<br>
-Chris Kim: Communication and Issues Manager<br>
-David Liang: Front End Javascript and HTML<br>
+Brian Guo: Code Supervisor (Back End) <br>
+Chris Kim: Communication and Issues Manager (Back End)<br>
+David Liang: Javascript and HTML (Front End)<br>
 
 Tools:
 Python CSS Flask Javascript API Mongo
@@ -20,7 +20,8 @@ CONCEPT: NICHE/COLLEGE BOARD FOR NYC HIGH SCHOOLS (PRIVATE AND PUBLIC)
 
 1/20/15 - API success! Now able to access data from NYC Open Data.
 
-1/25/15 - David finishing format for high school pages and made more templates. Brian incorporated more APIs from OpenData, and combined all API data from separate API's into one database.
+1/24/15 - David finishing format for high school pages and made more templates. Brian incorporated more APIs from OpenData, and combined all API data from separate API's into one database.
 
+1/25/15 - Brian made all search functions work. Each school now has an individual page. OpenData from different APIs are being compiled. Chris fixed the register, login, and logout.
 
 1/27/15 - Project is due!
