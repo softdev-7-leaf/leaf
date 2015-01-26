@@ -44,16 +44,18 @@ def login():
                 password = request.form["password"]
                 button = request.form["b"]
                 if button == "Login":
-                        if(database.validateUser(username,password) == False):
-                                error = 'Unregistered username or incorrect password'
+			user = users.find_one({'username': username})
+                        if user == None:
+                                flash("Not a username buddy")
                                 return redirect(url_for('login'))
-                                flash("You've logged in successfully")
-                                session['username'] = request.form['username']
-                                gender = "male"
-                                age = 42
-                                return render_template("user.html", username = username, gender = gender, age = age)
-                else:
-                        return redirect(url_for('register'))
+			elif user['password'] != password:
+				flash("Password and username do not match")
+				return redirect(url_for('login'))
+			else:
+				flash("success")
+				return redirect(url_for('login'))
+		else: 
+			return redirect(url_for('register'))
 def add_user(username, password, emailaddress, gender) : #, age
 	user = {
 		'username' : username, 
