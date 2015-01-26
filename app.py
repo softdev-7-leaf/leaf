@@ -11,9 +11,13 @@ from pymongo import Connection
 app=Flask(__name__)
 app.secret_key = os.urandom(24)
 abc = urllib2.Request("https://data.cityofnewyork.us/resource/mreg-rk5p.json")
+sat = urllib2.Request("https://data.cityofnewyork.us/resource/zt9s-n5aj.json")
 text = urlopen(abc)
+sattext = urlopen(sat)
 text2 = text.read()
+sattext2 = sattext.read()
 schoolslist = json.loads(text2)
+schoolslist2 = json.loads(sattext2)
 dbn_codes = []
 c= Connection()
 client = MongoClient()
@@ -22,6 +26,7 @@ c.drop_database(db)
 users = db.users
 schoolinfo=db.one
 schoolinfo.insert(schoolslist)
+schoolinfo.insert(schoolslist2)
 shortened = schoolinfo.aggregate([{"$group": {
         "_id": "$dbn",
         "printed_school_name": {"$first": "$printed_school_name"},
@@ -29,7 +34,11 @@ shortened = schoolinfo.aggregate([{"$group": {
         "program_code": {"$addToSet": "$program_code"},
         "directory_page_": {"$first": "$directory_page_"},
         "borough": {"$first": "$borough"},
-        "interest_area": {"$addToSet": "$interest_area"}
+        "interest_area": {"$addToSet": "$interest_area"},
+        "writing_mean": {"$addToSet": "$writing_mean"},
+        "critical_reading_mean": {"$addToSet": "$critical_reading_mean"},
+        "mathematics_mean": {"$addToSet": "$mathematics_mean"},
+        "number_of_test_takers": {"$addToSet": "$number_of_test_takers"},
         }}])
 #schoolinfo.group(key={"dbn":1},
 schoolinfo2 = db.two
@@ -123,13 +132,19 @@ def school(code = None):
                 session.clear()
                 #print "YES!"  
                 #print schoolinfo.find_one({"dbn": code})
-                a = schoolinfo.find_one({"dbn": code})
-                #print a     
+                a = schoolinfo2.find_one({"_id": code})
+                print schoolinfo2     
                 if a != None:
                         #print "YES! 2--------------------------------"
                         #name = schoolslist[n]['printed_school_name']
                         #program_code = schoolslist[n]['program_code']
-                        return render_template('schools.html',name=a['printed_school_name'], dbn=a['dbn']) #program_code=program_code, dbn=dbn)
+                        return render_template('schools.html',name=a['printed_school_name'], 
+                                dbn=a['_id'], 
+                                program_code=a['program_name'],
+                                critread=a['critical_reading_mean'],
+                                mathematics= a['mathematics_mean'],
+                                writing= a['writing_mean'],
+                                Interest= a['interest_area']) #program_code=program_code, dbn=dbn)
                 else:
                         return render_template('user.html')
         else:
@@ -158,7 +173,7 @@ def search(results=None):
                         results.append(x)
         #print "This is the array length" + str(len(results))
         #print "3.0--------------------------------------------------"
-        print results
+        #print results
         #print "4.0-----------------------------------------------------------"
         if request.method == "GET":
                 #print "GOT TO THIS STEP-----------------"

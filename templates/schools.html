@@ -85,11 +85,28 @@
                 <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
 		<br>
 		<h1> {{name}} ({{dbn}})</h1> 
-		Program: {{program_code}}
+		Programs: 
+    {% for x in program_code %}
+    | {{x}} 
+    {% endfor %}
 		<br>
 		Reviews
-		<hr>
 		<br>
+    Critical Reading Average: {% for x in critread %}
+    | {{x}} 
+    {% endfor %}
+    <br>
+    Mathematical Average: {% for x in mathematics %}
+    | {{x}} 
+    {% endfor %}
+    <br>
+    Writing Average: {% for x in writing %}
+    | {{x}} 
+    {% endfor %}
+    <br>
+    Interest Area: {% for x in Interest %}
+    | {{x}} 
+    {% endfor %}
 		<div class="push"></div>
 		
 		<div class="navbar navbar-inverse navbar-fixed-bottom">
