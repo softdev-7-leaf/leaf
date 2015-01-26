@@ -120,15 +120,6 @@ def search(results=None):
                 {"borough":{"$regex": regx}},
                 {"selection_method":{"$regex": regx}},
                 {"program_name":{"$regex": regx}}]},{"_id":0})
-        #n = schoolinfo.find({ "$or": [
-        #        {"printed_school_name": {"$regex": "/.*" +field + ".*/i"}},
-        #        {"program_code":{"$regex": "/.*" +field + ".*/i"}},
-        #        {"directory_page_":{"$regex": "/.*" +field + ".*/i"}},
-        #        {"dbn":{"$regex": "/.*" +field + ".*/i"}},
-        #        {"urls":{"$regex": "/.*" +field + ".*/i"}},
-        #        {"borough":{"$regex": "/.*" +field + ".*/i"}},
-        #        {"selection_method":{"$regex": "/.*" +field + ".*/i"}},
-        #        {"program_name":{"$regex": "/.*" +field + ".*/i"}}]},{"_id":0})
         for x in n:
                 if not x in results:
                         results.append(x)
@@ -144,7 +135,7 @@ def search(results=None):
                 #print "\n"
         #print 'These are the session results'
         #print escape(session['results'])
-        return render_template("search.html",results=results)
+        return render_template("search.html",results=results, Search="'"+field+"'")
 
 
 
