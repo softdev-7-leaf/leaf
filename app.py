@@ -119,6 +119,7 @@ def add_user(username, password, emailaddress, gender) : #, age
 @app.route("/register",methods=["GET","POST"])
 def register():
 	if request.method=="GET":
+		flash("Password requirements: The length must be greater than 4 and less than 20, and have at least one digit, one uppercase letter and one lowercase letter.")
                 return render_template("register.html")
 	else: 
         	button = request.form["b"]
@@ -126,6 +127,7 @@ def register():
         	        return redirect(url_for('login'))
          	username = request.form["username"]
         	password = request.form["password"]
+		password2 = request.form["password2"]
 		gender = request.form["gender"]
         	emailaddress = request.form["emailaddress"]
 		if users.find_one({'username': username}) != None:
@@ -136,6 +138,9 @@ def register():
 			return redirect(url_for('register'))
 		if not validate_email(str(emailaddress)):
 			flash("This is not an email")
+			return redirect(url_for('register'))
+		if not password == password2:
+			flash("Passwords do not match")
 			return redirect(url_for('register'))
 		if not validate_password(str(password)):
 			flash("The password does not meet the requirements: The length must be greater than 4 and less than 20, and have at least one digit, one uppercase letter and one lowercase letter.")
