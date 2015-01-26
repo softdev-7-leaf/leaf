@@ -114,12 +114,6 @@ def register():
 		session['emailaddress'] = emailaddress
 		flash("You've sucessfully registered, now login!")
 		return redirect(url_for('login'))
-@app.route("/user/<username>",methods=["GET","POST"])
-def user(username):
-        if request.method=="GET":
-                return render_template("user.html", username = username)
-        else:
-                return render_template("user.html", username = username)
 
 @app.route('/logout')
 def logout():
