@@ -50,6 +50,37 @@ schoolinfo2.insert(shortened['result'])
 #highschools= urlopen(request)
 #response = highschools.read()
 
+def validate_email(email):
+    at = str.find(email, "@")
+    period = str.find(email, ".")
+    if (at <= 0) or (period <= 0) or (at >= len(email)-5) or (period >= len(email) - 3):
+        return False
+    else:
+        return True
+def upper(password):
+    uppers = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    for p in password:
+        if (str.find(uppers, p) >= 0):
+            return True
+    return False
+
+def lower(password):
+    lowers = "abcdefghijklmnopqrstuvwxyz"
+    for p in password:
+        if (str.find(lowers, p) >= 0):
+            return True
+    return False
+
+def digit(password):
+    digits = "1234567890"
+    for p in password:
+        if (str.find(digits, p) >= 0):
+            return True
+    return False
+def validate_password(password):
+    return (len(password) >= 6) and (len(password) <= 8) and (upper(password)) and (lower(password)) and (digit(password))
+
+
 @app.route("/",methods=["GET","POST"])
 @app.route("/login",methods=["GET","POST"])
 def login():
