@@ -64,7 +64,7 @@ def login():
 				return redirect(url_for('login'))
 			else:
 				flash("success")
-				return redirect(url_for('home', username=username))
+				return redirect(url_for('user_home', username=username))
 		else: 
 			return redirect(url_for('register'))
 def add_user(username, password, emailaddress, gender) : #, age
@@ -114,9 +114,9 @@ def logout():
         session["username"] = ""
         return redirect(url_for("login"))
 
-@app.route("/home",methods=["GET","POST"])
-def home():
-	return render_template("home.html")
+@app.route("/home/<username>",methods=["GET","POST"])
+def user_home(username):
+	return render_template("home.html", username = username)
 @app.route('/school/<code>', methods=["GET","POST"])
 def school(code = None):
         if request.method == "GET":
