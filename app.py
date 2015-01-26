@@ -174,7 +174,6 @@ def user_home(username):
         session.modified=True
         return render_template("home.html", username=username)
     else:
-        print "abc"
         if 'b' in request.form:
             button = request.form["b"]
     	    if button=="Logout":
