@@ -238,6 +238,10 @@ def search(results=None):
             field = request.form['searchbar']
             return redirect(url_for("search", field=field))
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
 
 
 
