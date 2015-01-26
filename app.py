@@ -22,7 +22,18 @@ c.drop_database(db)
 users = db.users
 schoolinfo=db.one
 schoolinfo.insert(schoolslist)
-
+shortened = schoolinfo.aggregate([{"$group": {
+        "_id": "$dbn",
+        "printed_school_name": {"$first": "$printed_school_name"},
+        "program_name": {"$addToSet": "$program_name"},
+        "program_code": {"$addToSet": "$program_code"},
+        "directory_page_": {"$first": "$directory_page_"},
+        "borough": {"$first": "$borough"},
+        "interest_area": {"$addToSet": "$interest_area"}
+        }}])
+#schoolinfo.group(key={"dbn":1},
+schoolinfo2 = db.two
+schoolinfo2.insert(shortened['result'])
 #for a in schoolslist:
 #        dbn_codes.append(a['dbn'])
 
@@ -112,7 +123,7 @@ def school(code = None):
                         #print "YES! 2--------------------------------"
                         #name = schoolslist[n]['printed_school_name']
                         #program_code = schoolslist[n]['program_code']
-                        return render_template('schools.html',name=a['printed_school_name']) #program_code=program_code, dbn=dbn)
+                        return render_template('schools.html',name=a['printed_school_name'], dbn=a['dbn']) #program_code=program_code, dbn=dbn)
                 else:
                         return render_template('user.html')
         else:
@@ -122,12 +133,12 @@ def school(code = None):
 @app.route('/search/', methods=["GET","POST"])
 def search(results=None):
         field = request.args.get('field')
-        print field
+        #print field
         results = []
-        print "2.0"
+        #print "2.0"
         fieldstring = ".*" + field + ".*"
         regx = re.compile(fieldstring, re.IGNORECASE)
-        n = schoolinfo.find({ "$or": [
+        n = schoolinfo2.find({ "$or": [
                 {"printed_school_name": {"$regex": regx}},
                 {"program_code":{"$regex": regx}},
                 {"directory_page_":{"$regex": regx}},
@@ -135,32 +146,23 @@ def search(results=None):
                 {"urls":{"$regex": regx}},
                 {"borough":{"$regex": regx}},
                 {"selection_method":{"$regex": regx}},
-                {"program_name":{"$regex": regx}}]},{"_id":0})
-        #n = schoolinfo.find({ "$or": [
-        #        {"printed_school_name": {"$regex": "/.*" +field + ".*/i"}},
-        #        {"program_code":{"$regex": "/.*" +field + ".*/i"}},
-        #        {"directory_page_":{"$regex": "/.*" +field + ".*/i"}},
-        #        {"dbn":{"$regex": "/.*" +field + ".*/i"}},
-        #        {"urls":{"$regex": "/.*" +field + ".*/i"}},
-        #        {"borough":{"$regex": "/.*" +field + ".*/i"}},
-        #        {"selection_method":{"$regex": "/.*" +field + ".*/i"}},
-        #        {"program_name":{"$regex": "/.*" +field + ".*/i"}}]},{"_id":0})
+                {"program_name":{"$regex": regx}}]})
         for x in n:
-                if not x in results:
+                if not (x in results):
                         results.append(x)
         #print "This is the array length" + str(len(results))
-        print "3.0--------------------------------------------------"
+        #print "3.0--------------------------------------------------"
         print results
-        print "4.0-----------------------------------------------------------"
+        #print "4.0-----------------------------------------------------------"
         if request.method == "GET":
-                print "GOT TO THIS STEP-----------------"
+                #print "GOT TO THIS STEP-----------------"
         #results = request.args.get("results")
         #for x in results:
                 #print x
                 #print "\n"
         #print 'These are the session results'
         #print escape(session['results'])
-        return render_template("search.html",results=results)
+                return render_template("search.html",results=results, Search="'"+field+"'")
 
 
 
