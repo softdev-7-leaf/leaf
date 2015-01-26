@@ -99,6 +99,10 @@ def register():
 			return redirect(url_for('register'))
 
 		add_user(username, password, emailaddress, gender) #, age
+		session['username'] = username
+		session['password'] = password
+		session['gender'] = gender
+		session['emailaddress'] = emailaddress
 		flash("You've sucessfully registered, now login!")
 		return redirect(url_for('login'))
 @app.route("/user/<username>",methods=["GET","POST"])
@@ -110,9 +114,12 @@ def user(username):
 
 @app.route('/logout')
 def logout():
-        flash("You've been logged out")
-        session["username"] = ""
-        return redirect(url_for("login"))
+    	session.pop('username', None)
+    	session.pop('password', None)
+    	session.pop('first_name', None)
+    	session.pop('last_name', None)
+	flash("You have successfully logged out")
+    	return redirect(url_for('login'))
 
 @app.route("/home/<username>",methods=["GET","POST"])
 def user_home(username):
