@@ -167,7 +167,7 @@ def logout():
     	return redirect(url_for('login'))
 
 @app.route("/home/<username>",methods=["GET","POST"])
-def user_home(username):
+def user_home(username=None):
     if request.method == "GET":
         session['username'] = username
         print session['username']
@@ -257,6 +257,11 @@ def about():
         if 'searchbar' in request.form:
             field = request.form['searchbar']
             return redirect(url_for("search", field=field))
+
+@app.route("/profile")
+def profile():
+    n = users.find_one({'username':session['username']})
+    return render_template("profile.html",username=session['username'], gender=n['gender'])
 
 
 
