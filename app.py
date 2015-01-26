@@ -132,12 +132,20 @@ def logout():
 
 @app.route("/home/<username>",methods=["GET","POST"])
 def user_home(username):
-	if request.method=="GET":
-		return render_template("home.html", username = username)
-	else: 
-		button = request.form["b"]
-		if button=="Logout":
-                	return redirect(url_for("logout"))
+    if request.method == "GET":
+        return render_template("home.html", username=username)
+    else:
+        print "abc"
+        if 'b' in request.form:
+            button = request.form["b"]
+    	    if button=="Logout":
+                    return redirect(url_for("logout"))
+        value = request.form['q']
+        print "this is the value"
+        print value
+        return redirect(url_for("search",field=value))
+
+
 @app.route('/school/<code>', methods=["GET","POST"])
 def school(code = None):
         if request.method == "GET":
@@ -166,10 +174,13 @@ def school(code = None):
 @app.route('/search/', methods=["GET","POST"])
 def search(results=None):
         field = request.args.get('field')
+        field2 = field.split(" ")
         #print field
         results = []
         #print "2.0"
-        fieldstring = ".*" + field + ".*"
+        fieldstring = ".*"
+        for value in field2:
+            fieldstring = fieldstring + value + ".*"
         regx = re.compile(fieldstring, re.IGNORECASE)
         n = schoolinfo2.find({ "$or": [
                 {"printed_school_name": {"$regex": regx}},
