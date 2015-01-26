@@ -53,7 +53,7 @@ def login():
 				return redirect(url_for('login'))
 			else:
 				flash("success")
-				return redirect(url_for('login'))
+				return render_template("home.html", username=username)
 		else: 
 			return redirect(url_for('register'))
 def add_user(username, password, emailaddress, gender) : #, age
