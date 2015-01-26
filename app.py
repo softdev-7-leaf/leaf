@@ -52,10 +52,7 @@ def login():
 @app.route("/register",methods=["GET","POST"])
 def register():
         if request.method=="GET":
-                a = []
-                for x in range(0,123):
-                        a.append(x)
-                return render_template("register.html", a = a)
+                return render_template("register.html")
         else:
                 button = request.form["b"]
                 if button == "Login":
