@@ -110,7 +110,9 @@ def login():
                         else:
                             flash("Welcome to Leaf")
                             session['username'] = username
-                            print session['username']
+                            session['password'] = password
+                            session['gender'] = user['gender']
+                            session['emailaddress'] = user['emailaddress']
                             return redirect(url_for('user_home', username=username))
                 #flash("Welcome to leaf")
 				#flash("Welcome to Leaf")
@@ -156,10 +158,6 @@ def register():
 			flash("The password does not meet the requirements: The length must be greater than 4 and less than 20, and have at least one digit, one uppercase letter and one lowercase letter.")
 			return redirect(url_for('register'))
 		add_user(username, password, emailaddress, gender) #, age
-		session['username'] = username
-		session['password'] = password
-		session['gender'] = gender
-		session['emailaddress'] = emailaddress
 		flash("You've sucessfully registered, now login!")
 		return redirect(url_for('login'))
 
@@ -270,11 +268,6 @@ def about():
         if 'searchbar' in request.form:
             field = request.form['searchbar']
             return redirect(url_for("search", field=field))
-
-#@app.route("/profile")
-#def profile():
-#    n = users.find_one({'username':session['username']})
-#    return render_template("profile.html",username=session['username'], gender=n['gender'])
 
 
 
