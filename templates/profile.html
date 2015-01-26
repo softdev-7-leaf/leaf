@@ -20,7 +20,7 @@
       <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
           <li class="sidebar-brand">
-            <a href="home.html">Leaf</a>
+            <font color="green">Leaf</font>
 	  </li>
           <li>
             <a href="about.html">What is Leaf?</a>
@@ -69,12 +69,12 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 	  <div class="container">
 	    <div class="navbar-header">
-              <a class="navbar-brand" href="home.html"><font color="green">Leaf</font></a>
+              <div class="navbar-brand" ><font color="green">Leaf</font></div>
 	    </div>
 	    <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-		<li class="active"><a href="home.html">Home</a></li>
-		<li><a href="about.html">About</a></li>
+		<li class="active"><a href="/home/{{username}}">Home</a></li>
+		<li><a href="/about">About</a></li>
 	      </ul>
 	      <form class="navbar-form navbar-left" role="search" method="POST">
 		<div class="form-group">
@@ -85,8 +85,8 @@
 		</button>
               </form>
               <ul class="nav navbar-nav navbar-right">
-		<li class="active"><a href="./register.html">Register <span class="sr-only">(current)</span></a></li>
-		<li><a href="./login.html/">Log in </a></li>
+		<li class="active"><a href="/profile">Profile <span class="sr-only">(current)</span></a></li>
+		<li><a href="/logout/">Log out </a></li>
               </ul>
 	    </div><!--/.nav-collapse -->
 	  </div><!--/.container -->
