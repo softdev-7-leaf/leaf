@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <title> {{ Search }} </title>
+    
+    <!-- Bootstrap Core CSS -->
+    <link href="../static/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <!--<link href="../static/custom.css" rel="stylesheet">-->
+
+    <style>
+      body { 
+      padding-top: 50px; 
+      background-image: url("../static/paper.png")}
+      hr {
+      border: none;
+      height: 1px;
+      /* Set the hr color */
+      color: #333; /* old IE */
+      background-color: #333; /* Modern Browsers */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+	  <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><font color="green">Leaf</font></a>
+	  </div>
+	  <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+	    </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="active"><a href="#">Personal Profile <span class="sr-only">(current)</span></a></li>
+            </ul>
+	  </div><!--/.nav-collapse -->
+	</div><!--/.container -->
+      </nav>
+      <div class="container">
+	<h2>
+          Results for {{ Search }}
+	</h2>
+      </div>
+      <div class="push">
+        <ul>{% for x in results %}
+          <li> <a href="/school/{{x['_id']}}"> {{x["printed_school_name"]}}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div> <!-- wrapper -->
+    <div class="footer">
+      <div class="container">
+        <h4 class="text-muted credit">
+	        Created by Tyler Wang, Chris Kim, David Liang, and Brian Guo. Link to our github page: <a href="https://github.com/softdev-7-leaf/leaf">https://github.com/softdev-7-leaf/leaf</a></h4>
+      <div>
+    </div>
+  </body>
+</html>
+
