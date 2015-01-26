@@ -24,4 +24,14 @@ CONCEPT: NICHE/COLLEGE BOARD FOR NYC HIGH SCHOOLS (PRIVATE AND PUBLIC)
 
 1/25/15 - Brian made all search functions work. Each school now has an individual page. OpenData from different APIs are being compiled. Chris fixed the register, login, and logout.
 
+To Do List:
+Digital Ocean
+Video
+Password Hash
+Email Checking
+css formatting
+make profile pages
+make all pages look alike
+personal profile - contain personal info, like facebook, add high schools, rate high schools
+
 1/27/15 - Project is due!
