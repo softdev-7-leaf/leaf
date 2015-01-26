@@ -18,7 +18,6 @@ c= Connection()
 client = MongoClient()
 db = client.leaf
 c.drop_database(db)
-users = db.users
 schoolinfo=db.one
 schoolinfo.insert(schoolslist)
 
@@ -53,37 +52,26 @@ def login():
                                 return render_template("user.html", username = username, gender = gender, age = age)
                 else:
                         return redirect(url_for('register'))
-def add_user(username, password, emailaddress, gender) : #, age
-	user = {
-		'username' : username, 
-		'password' : password,
-        	'emailaddress' : emailaddress,
-        	'gender' : gender,
-		#'age' : age
-	}
-	return users.insert(user)
+
 @app.route("/register",methods=["GET","POST"])
 def register():
-	if request.method=="GET":
-                return render_template("register.html")
-	else: 
-        	button = request.form["b"]
-		if button == "Login":
-        	        return redirect(url_for('login'))
-         	username = request.form["username"]
-        	password = request.form["password"]
-		gender = request.form["gender"]
-        	emailaddress = request.form["emailaddress"]
-		if users.find_one({'username': username}) != None:
-			flash("The username you submitted is already taken, please try again.")
-			return redirect(url_for('register'))
-		if users.find_one({'emailaddress': emailaddress}) != None:
-			flash("The email you submitted already has an account tied to it, please try again.")
-			return redirect(url_for('register'))
-
-		add_user(username, password, emailaddress, gender) #, age
-		flash("You've sucessfully registered, now login!")
-		return redirect(url_for('login'))
+       button = request.form["b"]
+       if button == "Login":
+                return redirect(url_for('login'))
+	if request.method == "POST": 
+                username = request.form["username"]
+                password = request.form["password"]
+                emailaddress = request.form["emailaddress"]
+        if db.userexists(username):
+            flash("The username you submitted is already taken, please try again.")
+            return redirect(url_for('register'))
+        if db.emailexists(email):
+            flash("The email you submitted already has an account tied to it, please try again.")
+            return redirect(url_for('register'))
+        else:
+	    db.adduser(username, password, emailaddress, gender, age)
+            flash("You've sucessfully registered, now login!")
+            return redirect(url_for('login'))
 @app.route("/user/<username>",methods=["GET","POST"])
 def user(username):
         if request.method=="GET":
