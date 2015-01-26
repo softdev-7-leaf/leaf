@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, e
 import database
 import os, urllib2, json
 import pymongo
+import re
 from pymongo import MongoClient
 from urllib2 import urlopen
 from pymongo import Connection
@@ -108,15 +109,26 @@ def search(results=None):
         print field
         results = []
         print "2.0"
+        fieldstring = ".*" + field + ".*"
+        regx = re.compile(fieldstring, re.IGNORECASE)
         n = schoolinfo.find({ "$or": [
-                {"printed_school_name": {"$regex": ".*" +field + ".*"}},
-                {"program_code":{"$regex": ".*" +field + ".*"}},
-                {"directory_page_":{"$regex": ".*" +field + ".*"}},
-                {"dbn":{"$regex": ".*" +field + ".*"}},
-                {"urls":{"$regex": ".*" +field + ".*"}},
-                {"borough":{"$regex": ".*" +field + ".*"}},
-                {"selection_method":{"$regex": ".*" +field + ".*"}},
-                {"program_name":{"$regex": ".*" +field + ".*"}}]},{"_id":0})
+                {"printed_school_name": {"$regex": regx}},
+                {"program_code":{"$regex": regx}},
+                {"directory_page_":{"$regex": regx}},
+                {"dbn":{"$regex": regx}},
+                {"urls":{"$regex": regx}},
+                {"borough":{"$regex": regx}},
+                {"selection_method":{"$regex": regx}},
+                {"program_name":{"$regex": regx}}]},{"_id":0})
+        #n = schoolinfo.find({ "$or": [
+        #        {"printed_school_name": {"$regex": "/.*" +field + ".*/i"}},
+        #        {"program_code":{"$regex": "/.*" +field + ".*/i"}},
+        #        {"directory_page_":{"$regex": "/.*" +field + ".*/i"}},
+        #        {"dbn":{"$regex": "/.*" +field + ".*/i"}},
+        #        {"urls":{"$regex": "/.*" +field + ".*/i"}},
+        #        {"borough":{"$regex": "/.*" +field + ".*/i"}},
+        #        {"selection_method":{"$regex": "/.*" +field + ".*/i"}},
+        #        {"program_name":{"$regex": "/.*" +field + ".*/i"}}]},{"_id":0})
         for x in n:
                 if not x in results:
                         results.append(x)
