@@ -63,7 +63,7 @@ def login():
 				flash("Password and username do not match")
 				return redirect(url_for('login'))
 			else:
-				flash("success")
+				flash("Welcome to Leaf")
 				return redirect(url_for('user_home', username=username))
 		else: 
 			return redirect(url_for('register'))
@@ -123,7 +123,12 @@ def logout():
 
 @app.route("/home/<username>",methods=["GET","POST"])
 def user_home(username):
-	return render_template("home.html", username = username)
+	if request.method=="GET":
+		return render_template("home.html", username = username)
+	else: 
+		button = request.form["b"]
+		if button=="Logout":
+                	return redirect(url_for("logout"))
 @app.route('/school/<code>', methods=["GET","POST"])
 def school(code = None):
         if request.method == "GET":
