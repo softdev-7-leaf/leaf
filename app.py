@@ -239,6 +239,9 @@ def search(results=None):
         #print 'These are the session results'
         #print escape(session['results'])
                 return render_template("search.html",results=results, Search="'"+field+"'")
+        else:
+            field = request.form['searchbar']
+            return redirect(url_for("search", field=field))
 
 
 
