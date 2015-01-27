@@ -353,8 +353,9 @@ def editprofile():
                         'username' : session['username'], 
                         'password' : password2,
                         'emailaddress' : session['emailaddress'],
-                        'gender' : session['gender'],                            'first' : 1,
-                            #'age' : age
+                        'gender' : session['gender'],                            
+                        'first' : 1,
+                        #'age' : age
                         })
                 session['password'] = password
                 session['first'] = 1

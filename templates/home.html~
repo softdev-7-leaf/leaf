@@ -12,7 +12,6 @@
     <style>
       body { 
       padding-top: 50px; 
-      padding-bottom: 0px;
       background-image: url("../static/paper.png")}
     </style>
   </head>
@@ -31,11 +30,9 @@
 	  </div>
 	  <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-	      <li class="active"><a href="/about">About</a></li>
 	    </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li class="active"><a href="/profile">Profile <span class="sr-only">(current)</span></a></li>
-	      <li><a href="/logout">Log out</a></li>
+              <li class="active"><a href="/profile">Personal Profile <span class="sr-only">(current)</span></a></li>
             </ul>
 	  </div><!--/.nav-collapse -->
 	</div><!--/.container -->
@@ -51,16 +48,16 @@
 	<p>
           Find high schools. Find their information. Compare them. Rate them. 
 	</p>
-	<form role="search" method="POST">	
-	  <span class="input_form col-md-8 col-md-offset-2">
-	    <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search for high schools..." name="q">
-              <div class="input-group-btn">
-		<button class="btn btn-success" type="submit">Search</button>
-              </div>
+  <form role="search" method="POST">	
+	<span class="input_form col-md-8 col-md-offset-2">
+	  <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for high schools..." name="q">
+            <div class="input-group-btn">
+              <button class="btn btn-success" type="submit">Search</button>
             </div>
-	  </span>
-	</form>
+          </div>
+	</span>
+  </form>
       </div>
       <div class="push"></div>
     </div>
@@ -69,7 +66,10 @@
 	<hr>
 	Created by Tyler Wang, Chris Kim, David Liang, and Brian Guo. Link to our github page: <a href="https://github.com/softdev-7-leaf/leaf">https://github.com/softdev-7-leaf/leaf</a>
       </div>
-      <br>
+	<form method="POST">
+	<button class="btn btn-lg btn-success btn-block" type="submit" name="b" value="Logout">Logout</button>
+	</form>
+	<br>
     </div>
   </body>
 </html>

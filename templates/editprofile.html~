@@ -23,7 +23,7 @@
             <font color="green">Leaf</font>
 	  </li>
           <li>
-            <a href="/about">What is Leaf?</a>
+            <a href="about.html">What is Leaf?</a>
           </li>
           <li>
             <a href="https://github.com/softdev-7-leaf/leaf">Our Repo</a>
@@ -44,15 +44,38 @@
 	      <h1>
 		Welcome, {{ username }}
 		<hr>
-		Age: {{ age }}
-		<br>
-		Gender: {{ gender }}
-		<br>
-		Email: {{ emailaddress }}
 	      </h1>
-	      <form method="POST">
-		<button class="btn btn-info" type="submit" name="edit" value="edit">Edit Profile</button>
-	      </form>
+	      <h2> <u> Edit your profile: </u> </h2>
+	      <h1>
+		<!-- Flashed messages -->
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+		<!-- {% for message in messages %} -->
+		<div class="alert alert-info">
+		  {{messages[0]}}
+		</div>
+		<!-- {% endfor %} -->
+		{% endif %}
+		{% endwith %}
+		<form method="POST">
+		  Age: {{ age }}
+		  <br>
+		  Gender: {{ gender }}
+		  <br>
+		  Email Address: <input type="text" name="emailaddress" value = {{ emailaddress }}>
+		  <br>
+		  <button class="btn btn-primary" type="submit" name="edit" value="edit">Edit Email Address</button>
+		  <br>
+		  Change Password: <br>
+		  Old Password: <input type="password" name="password">
+		  <br>
+		  New Password: <input type="password" name="password2">
+		  <br>
+		  Re-type New Password: <input type="password" name="password3">
+		  <br>
+		  <button class="btn btn-primary" type="submit" name="pwchange" value="pwchange">Change Password</button>
+		</form>
+	      </h1>
 
 	      <div class="push"></div>
 	      
@@ -88,7 +111,8 @@
 		</button>
               </form>
               <ul class="nav navbar-nav navbar-right">
-		<li class="active"><a href="/logout">Log out <span class="sr-only">(current)</span></a></li>
+		<li class="active"><a href="/profile">Profile <span class="sr-only">(current)</span></a></li>
+		<li><a href="/logout">Log out </a></li>
               </ul>
 	    </div><!--/.nav-collapse -->
 	  </div><!--/.container -->

@@ -122,6 +122,7 @@ def login():
                         flash("Password and username do not match")
                         return redirect(url_for('login'))
                     else:
+<<<<<<< HEAD
                             #flash("Welcome to Leaf")
                         session['username'] = username
                         session['password'] = password
@@ -130,6 +131,24 @@ def login():
                         if user['first'] == 0:
                             return redirect(url_for('profile'))
                         return redirect(url_for('user_home', username=username))
+=======
+                        user = users.find_one({'username': username})
+                        if user == None:
+                            flash("Not a Valid Username")
+                            return redirect(url_for('login'))
+                        elif user['password'] != password:
+				            flash("Password and username do not match")
+				            return redirect(url_for('login'))
+                        else:
+                            #flash("Welcome to Leaf")
+                            session['username'] = username
+                            session['password'] = password
+                            session['gender'] = user['gender']
+                            session['emailaddress'] = user['emailaddress']
+                            if user['first'] == 0:
+                                return redirect(url_for('profile'))
+                            return redirect(url_for('user_home', username=username))
+>>>>>>> be79fee170bd83a8f9e05b0fc589d61e2784837d
                 #flash("Welcome to leaf")
 				#flash("Welcome to Leaf")
 				#return redirect(url_for('user_home', username=username))
