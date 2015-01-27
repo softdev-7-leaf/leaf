@@ -98,6 +98,7 @@ def login():
                 	    session['username'] = username
                             session['gender'] = 'Male'
                             session['emailaddress'] = 'magicfingers@gmail.com'
+                            session['first'] = 1
                             return redirect(url_for('user_home', username=username))
                     else:
                         user = users.find_one({'username': username})
@@ -113,6 +114,8 @@ def login():
                             session['password'] = password
                             session['gender'] = user['gender']
                             session['emailaddress'] = user['emailaddress']
+                            if user['first'] == 0:
+                                return redirect(url_for('editprofile'))
                             return redirect(url_for('user_home', username=username))
                 #flash("Welcome to leaf")
 				#flash("Welcome to Leaf")
@@ -125,6 +128,7 @@ def add_user(username, password, emailaddress, gender) : #, age
 		'password' : password,
         	'emailaddress' : emailaddress,
         	'gender' : gender,
+            'first' : 0,
 		#'age' : age
 	}
 	return users.insert(user)
@@ -251,6 +255,13 @@ def search(results=None):
         else:
             field = request.form['searchbar']
             return redirect(url_for("search", field=field))
+@app.route("/editprofile", methods=["GET","POST"])
+def editprofile():
+    if request.method=="GET":
+        return render_template("editprofile.html")
+    else:
+        return render_template("editprofile.html")
+
 @app.route("/profile", methods=["GET","POST"])
 def profile():
     if request.method=="GET":

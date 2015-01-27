@@ -42,13 +42,16 @@
             <div class="col-lg-12">
 
 	      <h1>
-		Welcome, {{ username }}
+		Welcome, {{ username }}. Edit your profile: 
 		<br>
+		<form method="POST">
 		Age: {{ age }}
 		<br>
 		Gender: {{ gender }}
 		<br>
-		Email: {{ emailaddress }}
+		Email: <input type="text" name="emailaddress" value = {{ emailaddress }}>
+		<br>
+	</form>
 	      </h1>
 
 	      <div class="push"></div>
