@@ -37,7 +37,7 @@ shortened = schoolinfo.aggregate([{"$group": {
         "writing_mean": {"$addToSet": "$writing_mean"},
         "critical_reading_mean": {"$addToSet": "$critical_reading_mean"},
         "mathematics_mean": {"$addToSet": "$mathematics_mean"},
-        "number_of_test_takers": {"$addToSet": "$number_of_test_takers"},
+        "number_of_test_takers": {"$addToSet": "$number_of_test_takers"}
         }}])
 #schoolinfo.group(key={"dbn":1},
 schoolinfo2 = db.two
@@ -48,6 +48,25 @@ schoolinfo2.insert(shortened['result'])
 
 #highschools= urlopen(request)
 #response = highschools.read()
+def refined_aggregate(coll):
+    dummyvar = coll.aggregate([{"$group":{
+        "_id": "$dbn",
+        "printed_school_name": {"$first": "$printed_school_name"},
+        "program_name": {"$addToSet": "$program_name"},
+        "program_code": {"$addToSet": "$program_code"},
+        "directory_page_": {"$first": "$directory_page_"},
+        "borough": {"$first": "$borough"},
+        "interest_area": {"$addToSet": "$interest_area"},
+        "writing_mean": {"$addToSet": "$writing_mean"},
+        "critical_reading_mean": {"$addToSet": "$critical_reading_mean"},
+        "mathematics_mean": {"$addToSet": "$mathematics_mean"},
+        "number_of_test_takers": {"$addToSet": "$number_of_test_takers"},
+        "rating":{"$avg": "$rating"}
+        }}])
+    #print dummyvar['result']
+    coll.remove({})
+    coll.insert(dummyvar['result'])
+
 
 def validate_email(email):
     at = str.find(email, "@")
@@ -208,11 +227,20 @@ def school(code = None):
                 #print "YES!"  
                 #print schoolinfo.find_one({"dbn": code})
                 a = schoolinfo2.find_one({"_id": code})
-                print schoolinfo2     
+                #print schoolinfo2     
                 if a != None:
+                        if 'rating' in a:
+                            #print "YES!----------------------"
+                            total = 0.0
+                            for n in a['rating']:
+                                total = total + float(n)
+                            rating = total / len(a['rating'])
+                        else:
+                            rating = "None"
                         #print "YES! 2--------------------------------"
                         #name = schoolslist[n]['printed_school_name']
                         #program_code = schoolslist[n]['program_code']
+                        #print rating
                         return render_template('schools.html',name=a['printed_school_name'], 
                                 dbn=a['_id'], 
                                 program_code=a['program_name'],
@@ -220,10 +248,31 @@ def school(code = None):
                                 mathematics= a['mathematics_mean'],
                                 writing= a['writing_mean'],
                                 Interest= a['interest_area'],
-                                username=session['username']) #program_code=program_code, dbn=dbn)
+                                username=session['username'],
+                                rating=rating) #program_code=program_code, dbn=dbn)
         else: 
-                field = request.form['searchbar']
-                return redirect(url_for("search", field=field ))
+                if 'searchbar' in request.form:
+                    field = request.form['searchbar']
+                    return redirect(url_for("search", field=field ))
+                elif 'rating' in request.form:
+                    rating = request.form['rating']
+                    #print "THIS IS THE RATING"
+                    #print rating
+                    if 'rating' in schoolinfo2.find_one({"_id":code}):
+                        currentratings=schoolinfo2.find_one({"_id":code})['rating']
+                        #print currentratings
+                        #print rating
+                        currentratings.append(rating)
+                        #print currentratings
+                        schoolinfo2.update({"_id":code},{"$set": {"rating": currentratings}})
+                        #print schoolinfo2.find_one({"_id":code})['rating']
+                    else:
+                        newarray=[]
+                        newarray.append(rating)
+                        schoolinfo2.update({"_id":code},{"$set":{"rating":newarray}})
+                    #print schoolinfo2.find_one({'_id':code})
+                    return redirect(url_for("school", code=code))
+
 
 @app.route('/search/', methods=["GET","POST"])
 def search(results=None):
