@@ -380,6 +380,9 @@ def editprofile():
                 session['password'] = password
                 session['first'] = 1
                 return redirect(url_for("profile"))
+        if 'searchbar' in request.form:
+            field = request.form['searchbar']
+            return redirect(url_for("search", field=field))
             
 
 @app.route("/profile", methods=["GET","POST"])
