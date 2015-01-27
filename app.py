@@ -110,7 +110,7 @@ def login():
 				            flash("Password and username do not match")
 				            return redirect(url_for('login'))
                         else:
-                            flash("Welcome to Leaf")
+                            #flash("Welcome to Leaf")
                             session['username'] = username
                             session['password'] = password
                             session['gender'] = user['gender']
