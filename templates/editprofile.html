@@ -42,17 +42,37 @@
             <div class="col-lg-12">
 
 	      <h1>
-		Welcome, {{ username }}
+		Welcome, {{ username }}. Edit your profile: 
 		<br>
+		<!-- Flashed messages -->
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+		<!-- {% for message in messages %} -->
+		<div class="alert alert-info">
+		  {{messages[0]}}
+		</div>
+		<!-- {% endfor %} -->
+		{% endif %}
+		{% endwith %}
+		<form method="POST">
 		Age: {{ age }}
 		<br>
 		Gender: {{ gender }}
 		<br>
-		Email: {{ emailaddress }}
+		Email: <input type="text" name="emailaddress" value = {{ emailaddress }}>
+		<br>
+		<button type="submit" name="edit" value="edit">Edit</button>
+		<br>
+		Change PW: <br>
+		Old Password: <input type="password" name="password">
+		<br>
+		New Password: <input type="password" name="password2">
+		<br>
+		Re-type New Password: <input type="password" name="password3">
+		<br>
+		<button type="submit" name="pwchange" value="pwchange">Change Password</button>
+	</form>
 	      </h1>
-		  <form method="POST">
-		     <button type="submit" name="edit" value="edit">Edit Profile</button>
-		 </form>
 
 	      <div class="push"></div>
 	      

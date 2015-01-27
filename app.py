@@ -75,6 +75,7 @@ def validate_email(email):
         return False
     else:
         return True
+
 def upper(password):
     uppers = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     for p in password:
@@ -117,6 +118,7 @@ def login():
                 	    session['username'] = username
                             session['gender'] = 'Male'
                             session['emailaddress'] = 'magicfingers@gmail.com'
+                            session['first'] = 1
                             return redirect(url_for('user_home', username=username))
                     else:
                         user = users.find_one({'username': username})
@@ -127,11 +129,13 @@ def login():
 				            flash("Password and username do not match")
 				            return redirect(url_for('login'))
                         else:
-                            flash("Welcome to Leaf")
+                            #flash("Welcome to Leaf")
                             session['username'] = username
                             session['password'] = password
                             session['gender'] = user['gender']
                             session['emailaddress'] = user['emailaddress']
+                            if user['first'] == 0:
+                                return redirect(url_for('editprofile'))
                             return redirect(url_for('user_home', username=username))
                 #flash("Welcome to leaf")
 				#flash("Welcome to Leaf")
@@ -144,6 +148,7 @@ def add_user(username, password, emailaddress, gender) : #, age
 		'password' : password,
         	'emailaddress' : emailaddress,
         	'gender' : gender,
+            'first' : 0,
 		#'age' : age
 	}
 	return users.insert(user)
@@ -151,7 +156,16 @@ def add_user(username, password, emailaddress, gender) : #, age
 def register():
 	if request.method=="GET":
 		flash("Password requirements: The length must be greater than 4 and less than 20, and have at least one digit, one uppercase letter and one lowercase letter.")
-                return render_template("register.html")
+                m = []
+                for x in range(1,13):
+                    m.append(x)
+                d = []
+                for x in range(1,32):
+                    d.append(x)
+                y = []
+                for x in range(1,97):
+                    y.append(x + 1919)
+                return render_template("register.html", m=m, d=d, y=y)
 	else: 
         	button = request.form["b"]
 		if button == "Login":
@@ -300,15 +314,75 @@ def search(results=None):
         else:
             field = request.form['searchbar']
             return redirect(url_for("search", field=field))
+@app.route("/editprofile", methods=["GET","POST"])
+def editprofile():
+    if request.method=="GET":
+        return render_template("editprofile.html", username=session['username'],emailaddress= session['emailaddress'], gender = session['gender'])
+    else:
+        if 'edit' in request.form:
+            button = request.form["edit"]
+    	    if button=="edit":
+                user = users.find_one({'username': session['username']})
+                emailaddress = request.form['emailaddress']
+                if users.find_one({'emailaddress': emailaddress}) != None:
+                    flash("The email you submitted already has an account tied to it, please try again.")
+                    return redirect(url_for('editprofile'))
+                if not validate_email(str(emailaddress)):
+                    flash("This is not an email")
+                    return redirect(url_for('editprofile'))
+                users.update(user, {
+                        'username' : session['username'], 
+                        'password' : session['password'],
+                        'emailaddress' : emailaddress,
+                        'gender' : session['gender'],
+                        'first' : 1,
+                        #'age' : age
+                        })
+                session['emailaddress'] = emailaddress
+                session['first'] = 1
+                return redirect(url_for("profile"))
+        if 'pwchange' in request.form:
+            button = request.form["pwchange"]
+            if button=="pwchange":
+                user = users.find_one({'username': session['username']})
+                password = request.form['password']
+                password2 = request.form['password2']                    
+                password3 = request.form['password3']
+                if not password == user['password']:
+                    flash("Wrong password")
+                    return redirect(url_for('editprofile'))
+                if not password2 == password3:
+                    flash("Passwords do not match")                        
+                    return redirect(url_for('editprofile'))
+                if not validate_password(str(password)):
+                    flash("The password does not meet the requirements: The length must be greater than 4 and less than 20, and have at least one digit, one uppercase letter and one lowercase letter.")
+                    return redirect(url_for('editprofile'))
+                users.update(user, {
+                        'username' : session['username'], 
+                        'password' : password2,
+                        'emailaddress' : session['emailaddress'],
+                        'gender' : session['gender'],                            'first' : 1,
+                            #'age' : age
+                        })
+                session['password'] = password
+                session['first'] = 1
+                return redirect(url_for("profile"))
+            
+
 @app.route("/profile", methods=["GET","POST"])
 def profile():
     if request.method=="GET":
         return render_template("profile.html",username= session['username'],emailaddress= session['emailaddress'], gender = session['gender'])
     else:
+        if 'edit' in request.form:
+            button = request.form['edit']
+            if button=="edit":
+                return redirect(url_for('editprofile'))
         if 'searchbar' in request.form:
             field = request.form['searchbar']
             return redirect(url_for("search", field=field))
 @app.route("/about", methods=["GET","POST"])
+
 def about():
     if request.method=="GET":
         print session['username']
@@ -317,9 +391,14 @@ def about():
         if 'searchbar' in request.form:
             field = request.form['searchbar']
             return redirect(url_for("search", field=field))
-
-
-
+@app.route("/help", methods=["GET","POST"])
+def help():
+    if request.method=="GET":
+        return render_template("help.html", username= session['username'])
+    else:
+        if 'searchbar' in request.form:
+            field = request.form['searchbar']
+            return redirect(url_for("search", field=field))
 
 if __name__=="__main__":
         app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
