@@ -81,9 +81,9 @@
 		    </div><!--/.nav-collapse -->
 		  </div><!--/.container -->
 		</nav>
-		Hide Menu: 
+		<!--Hide Menu: 
 		<br>
-                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>-->
 		<br>
 		<h1> {{name}} ({{dbn}})</h1> 
 		Programs: 
@@ -109,7 +109,7 @@
     | {{x}} 
     {% endfor %}
     <br>
-    Average Rating:{{rating}}
+    Average Rating: | {{rating}}
     <form method="POST">
       Rating:
       <select name="rating">
@@ -163,7 +163,7 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
               <li class="active"><a href="/profile">Profile <span class="sr-only">(current)</span></a></li>
-              <li><a href="/logout/">Log out </a></li>
+              <li><a href="/logout">Log out </a></li>
             </ul>
 	  </div><!--/.nav-collapse -->
 	</div><!--/.container -->
