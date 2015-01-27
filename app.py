@@ -191,7 +191,7 @@ def register():
 			flash("Passwords do not match")
 			return redirect(url_for('register'))
 		if not validate_password(str(password)):
-			flash("The password does not meet the requirements: The length must be greater than 4 and less than 20, and have at least one digit, one uppercase letter and one lowercase letter.")
+			flash("The password does not meet the above requirements.")
 			return redirect(url_for('register'))
 		add_user(username, password, emailaddress, gender, month, day, year) #, age
 		flash("You've sucessfully registered, now login!")
