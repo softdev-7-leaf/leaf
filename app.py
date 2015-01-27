@@ -24,6 +24,7 @@ db = client.leaf
 c.drop_database(db)
 users = db.users
 schoolinfo=db.one
+ratedschools=[]
 schoolinfo.insert(schoolslist)
 schoolinfo.insert(schoolslist2)
 shortened = schoolinfo.aggregate([{"$group": {
@@ -259,18 +260,23 @@ def school(code = None):
                     rating = request.form['rating']
                     #print "THIS IS THE RATING"
                     #print rating
-                    if 'rating' in schoolinfo2.find_one({"_id":code}):
-                        currentratings=schoolinfo2.find_one({"_id":code})['rating']
+                    if not code in ratedschools:
+                        if 'rating' in schoolinfo2.find_one({"_id":code}):
+                            currentratings=schoolinfo2.find_one({"_id":code})['rating']
                         #print currentratings
                         #print rating
-                        currentratings.append(rating)
+                            currentratings.append(rating)
                         #print currentratings
-                        schoolinfo2.update({"_id":code},{"$set": {"rating": currentratings}})
+                            schoolinfo2.update({"_id":code},{"$set": {"rating": currentratings}})
+                            ratedschools.append(code)
                         #print schoolinfo2.find_one({"_id":code})['rating']
+                        else:
+                            newarray=[]
+                            newarray.append(rating)
+                            schoolinfo2.update({"_id":code},{"$set":{"rating":newarray}})
+                            ratedschools.append(code)
                     else:
-                        newarray=[]
-                        newarray.append(rating)
-                        schoolinfo2.update({"_id":code},{"$set":{"rating":newarray}})
+                        flash("You have already rated this once. You cannot rate agin")
                     #print schoolinfo2.find_one({'_id':code})
                     return redirect(url_for("school", code=code))
 
@@ -388,8 +394,8 @@ def profile():
         if 'searchbar' in request.form:
             field = request.form['searchbar']
             return redirect(url_for("search", field=field))
-@app.route("/about", methods=["GET","POST"])
 
+@app.route("/about", methods=["GET","POST"])
 def about():
     if request.method=="GET":
         print session['username']
