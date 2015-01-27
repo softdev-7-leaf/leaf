@@ -135,7 +135,7 @@ def login():
                             session['gender'] = user['gender']
                             session['emailaddress'] = user['emailaddress']
                             if user['first'] == 0:
-                                return redirect(url_for('editprofile'))
+                                return redirect(url_for('profile'))
                             return redirect(url_for('user_home', username=username))
                 #flash("Welcome to leaf")
 				#flash("Welcome to Leaf")
@@ -361,8 +361,9 @@ def editprofile():
                         'username' : session['username'], 
                         'password' : password2,
                         'emailaddress' : session['emailaddress'],
-                        'gender' : session['gender'],                            'first' : 1,
-                            #'age' : age
+                        'gender' : session['gender'],                            
+                        'first' : 1,
+                        #'age' : age
                         })
                 session['password'] = password
                 session['first'] = 1

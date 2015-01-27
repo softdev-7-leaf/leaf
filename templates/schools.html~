@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
     <title>Simple Sidebar - Start Bootstrap Template</title>
 
@@ -12,12 +18,13 @@
     <link href="../static/simple-sidebar.css" rel="stylesheet">
     <link href="../static/custom.css" rel="stylesheet">
 
-    
-  </head>
+  
+</head>
 
-  <body>
+<body>
 
     <div id="wrapper">
+
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
           <ul class="sidebar-nav">
@@ -74,9 +81,9 @@
 		    </div><!--/.nav-collapse -->
 		  </div><!--/.container -->
 		</nav>
-		<!--Hide Menu: 
+		Hide Menu: 
 		<br>
-                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>-->
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
 		<br>
 		<h1> {{name}} ({{dbn}})</h1> 
 		Programs: 
@@ -102,7 +109,7 @@
     | {{x}} 
     {% endfor %}
     <br>
-    Average Rating: | {{rating}}
+    Average Rating:{{rating}}
     <form method="POST">
       Rating:
       <select name="rating">
@@ -127,118 +134,13 @@
 		  <div class="container">
 		    <p class="navbar-text">Created by Tyler Wang, Chris Kim, David Liang, and Brian Guo.</p>
 		    <a href="https://github.com/softdev-7-leaf/leaf" class="navbar-btn btn-success btn">https://github.com/softdev-7-leaf/leaf</a>
-<!--
-      <!-- Sidebar -->
-      <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-          <li class="sidebar-brand">
-            <font color="green">Leaf</font>
-	  </li>
-          <li>
-            <a href="/about">What is Leaf?</a>
-          </li>
-          <li>
-            <a href="https://github.com/softdev-7-leaf/leaf">Our Repo</a>
-          </li>
-          <li>     
-	    <a href="/help">Contact Us</a> 
-          </li>
-        </ul>
-      </div>
-      <!-- /#sidebar-wrapper -->
-
-      <!-- Page Content -->
-      <div id="page-content-wrapper">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-12">
-              
-	      <nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-		  <div class="navbar-header">
-		    <a class="navbar-brand" href="#"><font color="green">Leaf</font></a> -->
 		  </div>
-		  <div id="navbar" class="navbar-collapse collapse">
-		    <ul class="nav navbar-nav">
-		      <li class="active"><a href="/home/{{username}}">Home</a></li>
-		      <li><a href="/about">About</a></li>
-		    </ul>
-		    <form class="navbar-form navbar-left" role="search">
-		      <div class="form-group">
-			<input type="text" class="form-control" placeholder="Search high schools...">
-		      </div>
-		      <button class="btn btn-info">
-			Go!
-		      </button>
-		    </form>
-		    <ul class="nav navbar-nav navbar-right">
-		      <li class="active"><a href='/profile'>Profile<span class="sr-only">(current)</span></a></li>
-		      <li><a href="/logout">Log out </a></li>
-		    </ul>
-		  </div><!--/.nav-collapse -->
-		</div><!--/.container -->
-	      </nav>
-	      <br>
-	      <br>
-	      <h1> {{name}} ({{dbn}})</h1> 
-	      <hr>
-	      Programs: 
-	      {% for x in program_code %}
-	      | {{x}} 
-	      {% endfor %}
-	      <br>
-	      <br>
-	      <b> Reviews </b>
-	      <br>
-	      Critical Reading Average: {% for x in critread %}
-	      | {{x}} 
-	      {% endfor %}
-	      <br>
-	      Mathematical Average: {% for x in mathematics %}
-	      | {{x}} 
-	      {% endfor %}
-	      <br>
-	      Writing Average: {% for x in writing %}
-	      | {{x}} 
-	      {% endfor %}
-	      <br>
-	      Interest Area: {% for x in Interest %}
-	      | {{x}} 
-	      {% endfor %}
-	      <br>
-	      Average Rating:{{rating}}
-	      <hr>
-	      <form method="POST">
-		Rating:
-		<select name="rating">
-		  <option value="0"> 0 </option>
-		  <option value="0.5"> 0.5 </option>
-		  <option value="1"> 1 </option>
-		  <option value="1.5"> 1.5 </option>
-		  <option value="2"> 2 </option>
-		  <option value="2.5"> 2.5 </option>
-		  <option value="3"> 3 </option>
-		  <option value="3.5"> 3.5 </option>
-		  <option value="4"> 4 </option>
-		  <option value="4.5"> 4.5 </option>
-		  <option value="5"> 5 </option>
-		</select>
-		<button class="btn btn-danger" type="submit">Rate</button>
-	      </form>
-
-	      <div class="push"></div>
-	      
-	      <div class="navbar navbar-inverse navbar-fixed-bottom">
-		<div class="container">
-		  <p class="navbar-text">Created by Tyler Wang, Chris Kim, David Liang, and Brian Guo.</p>
-		  <a href="https://github.com/softdev-7-leaf/leaf" class="navbar-btn btn-success btn">https://github.com/softdev-7-leaf/leaf</a>
 		</div>
-	      </div>
-	      <!-- break -->
+		<!-- break -->
+              </div>
             </div>
           </div>
         </div>
-<<<<<<< HEAD
         <!-- /#page-content-wrapper -->
     <div class="wrapper">
       <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -261,7 +163,7 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
               <li class="active"><a href="/profile">Profile <span class="sr-only">(current)</span></a></li>
-              <li><a href="/logout">Log out </a></li>
+              <li><a href="/logout/">Log out </a></li>
             </ul>
 	  </div><!--/.nav-collapse -->
 	</div><!--/.container -->
@@ -271,53 +173,24 @@
     <div class="footer">
       <div class="container">
 	<hr>
-=======
->>>>>>> upstream/master
       </div>
-      <!-- /#page-content-wrapper -->
-      <div class="wrapper">
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-	  <div class="container">
-	    <div class="navbar-header">
-              <div class="navbar-brand"><font color="green">Leaf</font></div>
-	    </div>
-	    <div id="navbar" class="navbar-collapse collapse">
-              <ul class="nav navbar-nav">
-		<li class="active"><a href="/home/{{username}}">Home</a></li>
-		<li><a href="/about">About</a></li>
-	      </ul>
-	      <form class="navbar-form navbar-left" role="search" method="POST">
-		<div class="form-group">
-		  <input type="text" class="form-control" placeholder="Search high schools..." name= "searchbar">
-		</div>
-		<button class="btn btn-info">
-		  Go!
-		</button>
-              </form>
-              <ul class="nav navbar-nav navbar-right">
-		<li class="active"><a href="/profile">Profile <span class="sr-only">(current)</span></a></li>
-		<li><a href="/logout/">Log out </a></li>
-              </ul>
-	    </div><!--/.nav-collapse -->
-	  </div><!--/.container -->
-	</nav>
-      </div>
-      <!-- /#wrapper -->
+    </div>
+    <!-- /#wrapper -->
 
-      <!-- jQuery -->
-      <script src="../js/jquery.js"></script>
+    <!-- jQuery -->
+    <script src="../js/jquery.js"></script>
 
-      <!-- Bootstrap Core JavaScript -->
-      <script src="../js/bootstrap.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../js/bootstrap.min.js"></script>
 
-      <!-- Menu Toggle Script -->
-      <script>
-	$("#menu-toggle").click(function(e) {
-	e.preventDefault();
-	$("#wrapper").toggleClass("toggled");
-	});
-      </script>
+    <!-- Menu Toggle Script -->
+    <script>
+      $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+      });
+    </script>
 
-  </body>
+</body>
 
 </html>
