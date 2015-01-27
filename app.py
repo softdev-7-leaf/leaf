@@ -114,44 +114,36 @@ def login():
                 password = request.form["password"]
                 button = request.form["b"]
                 if button == "Login":
-                    if username == "Stacy":
-                	    session['username'] = username
-                            session['gender'] = 'Male'
-                            session['emailaddress'] = 'magicfingers@gmail.com'
-                            session['first'] = 1
-                            return redirect(url_for('user_home', username=username))
+                    user = users.find_one({'username': username})
+                    if user == None:
+                        flash("Not a Valid Username")
+                        return redirect(url_for('login'))
+                    elif user['password'] != password:
+                        flash("Password and username do not match")
+                        return redirect(url_for('login'))
                     else:
-                        user = users.find_one({'username': username})
-                        if user == None:
-                            flash("Not a Valid Username")
-                            return redirect(url_for('login'))
-                        elif user['password'] != password:
-				            flash("Password and username do not match")
-				            return redirect(url_for('login'))
-                        else:
                             #flash("Welcome to Leaf")
-                            session['username'] = username
-                            session['password'] = password
-                            session['gender'] = user['gender']
-                            session['emailaddress'] = user['emailaddress']
-                            if user['first'] == 0:
-                                return redirect(url_for('profile'))
-                            return redirect(url_for('user_home', username=username))
+                        session['username'] = username
+                        session['password'] = password
+                        session['gender'] = user['gender']
+                        session['emailaddress'] = user['emailaddress']
+                        if user['first'] == 0:
+                            return redirect(url_for('profile'))
+                        return redirect(url_for('user_home', username=username))
                 #flash("Welcome to leaf")
 				#flash("Welcome to Leaf")
 				#return redirect(url_for('user_home', username=username))
 		else: 
-			return redirect(url_for('register'))
+                    return redirect(url_for('register'))
 def add_user(username, password, emailaddress, gender) : #, age
-	user = {
-		'username' : username, 
-		'password' : password,
-        	'emailaddress' : emailaddress,
-        	'gender' : gender,
-            'first' : 0,
-		#'age' : age
-	}
-	return users.insert(user)
+    user = {'username' : username, 
+                        'password' : password,
+                        'emailaddress' : emailaddress,
+                        'gender' : gender,
+                        'first' : 0,
+                        #'age' : age
+                        }
+    return users.insert(user)
 @app.route("/register",methods=["GET","POST"])
 def register():
 	if request.method=="GET":
