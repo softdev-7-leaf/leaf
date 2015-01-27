@@ -275,17 +275,50 @@ def editprofile():
     	    if button=="edit":
                 user = users.find_one({'username': session['username']})
                 emailaddress = request.form['emailaddress']
+                if users.find_one({'emailaddress': emailaddress}) != None:
+                    flash("The email you submitted already has an account tied to it, please try again.")
+                    return redirect(url_for('editprofile'))
+                if not validate_email(str(emailaddress)):
+                    flash("This is not an email")
+                    return redirect(url_for('editprofile'))
                 users.update(user, {
-		'username' : session['username'], 
-		'password' : session['password'],
-        	'emailaddress' : emailaddress,
-        	'gender' : session['gender'],
-            'first' : 1,
-		#'age' : age
-	})
+                        'username' : session['username'], 
+                        'password' : session['password'],
+                        'emailaddress' : emailaddress,
+                        'gender' : session['gender'],
+                        'first' : 1,
+                        #'age' : age
+                        })
                 session['emailaddress'] = emailaddress
                 session['first'] = 1
                 return redirect(url_for("profile"))
+        if 'pwchange' in request.form:
+            button = request.form["pwchange"]
+            if button=="pwchange":
+                user = users.find_one({'username': session['username']})
+                password = request.form['password']
+                password2 = request.form['password2']                    
+                password3 = request.form['password3']
+                if not password == user['password']:
+                    flash("Wrong password")
+                    return redirect(url_for('editprofile'))
+                if not password2 == password3:
+                    flash("Passwords do not match")                        
+                    return redirect(url_for('editprofile'))
+                if not validate_password(str(password)):
+                    flash("The password does not meet the requirements: The length must be greater than 4 and less than 20, and have at least one digit, one uppercase letter and one lowercase letter.")
+                    return redirect(url_for('editprofile'))
+                users.update(user, {
+                        'username' : session['username'], 
+                        'password' : password2,
+                        'emailaddress' : session['emailaddress'],
+                        'gender' : session['gender'],                            'first' : 1,
+                            #'age' : age
+                        })
+                session['password'] = password
+                session['first'] = 1
+                return redirect(url_for("profile"))
+            
 
 @app.route("/profile", methods=["GET","POST"])
 def profile():
