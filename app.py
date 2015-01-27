@@ -268,9 +268,16 @@ def search(results=None):
 @app.route("/editprofile", methods=["GET","POST"])
 def editprofile():
     if request.method=="GET":
-        return render_template("editprofile.html")
+        return render_template("editprofile.html", username=session['username'],emailaddress= session['emailaddress'], gender = session['gender'])
     else:
-        return render_template("editprofile.html")
+        if 'edit' in request.form:
+            button = request.form["edit"]
+    	    if button=="edit":
+                emailaddress = request.form['emailaddress']
+                user = users.find_one({'username': session['username']})
+                user['emailaddress'] = emailaddress
+                session['emailaddress'] = emailaddress
+                return redirect(url_for("profile"))
 
 @app.route("/profile", methods=["GET","POST"])
 def profile():
