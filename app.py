@@ -300,6 +300,7 @@ def profile():
             field = request.form['searchbar']
             return redirect(url_for("search", field=field))
 @app.route("/about", methods=["GET","POST"])
+
 def about():
     if request.method=="GET":
         print session['username']
@@ -309,8 +310,13 @@ def about():
             field = request.form['searchbar']
             return redirect(url_for("search", field=field))
 
-
-
+def help():
+    if request.method=="GET":
+        return render_template("help.html", username= session['username'])
+    else:
+        if 'searchbar' in request.form:
+            field = request.form['searchbar']
+            return redirect(url_for("search", field=field))
 
 if __name__=="__main__":
         app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
