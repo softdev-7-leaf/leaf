@@ -24,7 +24,7 @@ db = client.leaf
 c.drop_database(db)
 users = db.users
 schoolinfo=db.one
-ratedschools=[]
+ratedschools={}
 schoolinfo.insert(schoolslist)
 schoolinfo.insert(schoolslist2)
 shortened = schoolinfo.aggregate([{"$group": {
@@ -131,6 +131,8 @@ def login():
                         session['month'] = user['month']
                         session['day'] = user['day']
                         session['year'] = user['year']
+                        if username not in ratedschools:
+                            ratedschools['username'] = []
                         if user['first'] == 0:
                             return redirect(url_for('profile'))
                         return redirect(url_for('user_home', username=username))
@@ -260,7 +262,8 @@ def school(code = None):
                     rating = request.form['rating']
                     #print "THIS IS THE RATING"
                     #print rating
-                    if not code in ratedschools:
+                    username = session['username']
+                    if not code in ratedschools['username']:
                         if 'rating' in schoolinfo2.find_one({"_id":code}):
                             currentratings=schoolinfo2.find_one({"_id":code})['rating']
                         #print currentratings
@@ -268,13 +271,13 @@ def school(code = None):
                             currentratings.append(rating)
                         #print currentratings
                             schoolinfo2.update({"_id":code},{"$set": {"rating": currentratings}})
-                            ratedschools.append(code)
+                            ratedschools['username'].append(code)
                         #print schoolinfo2.find_one({"_id":code})['rating']
                         else:
                             newarray=[]
                             newarray.append(rating)
                             schoolinfo2.update({"_id":code},{"$set":{"rating":newarray}})
-                            ratedschools.append(code)
+                            ratedschools['username'].append(code)
                     else:
                         flash("You have already rated this once. You cannot rate again")
                     #print schoolinfo2.find_one({'_id':code})
