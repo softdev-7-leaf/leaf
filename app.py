@@ -327,7 +327,7 @@ def search(results=None):
 @app.route("/editprofile", methods=["GET","POST"])
 def editprofile():
     if request.method=="GET":
-        return render_template("editprofile.html", username=session['username'],emailaddress= session['emailaddress'], gender = session['gender'])
+        return render_template("editprofile.html", username=session['username'],emailaddress= session['emailaddress'], gender = session['gender'], month= session['month'], day= session['day'], year = session['year'])
     else:
         if 'edit' in request.form:
             button = request.form["edit"]
