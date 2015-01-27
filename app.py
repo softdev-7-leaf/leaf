@@ -309,7 +309,7 @@ def about():
         if 'searchbar' in request.form:
             field = request.form['searchbar']
             return redirect(url_for("search", field=field))
-
+@app.route("/help", methods=["GET","POST"])
 def help():
     if request.method=="GET":
         return render_template("help.html", username= session['username'])
