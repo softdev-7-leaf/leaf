@@ -276,7 +276,7 @@ def school(code = None):
                             schoolinfo2.update({"_id":code},{"$set":{"rating":newarray}})
                             ratedschools.append(code)
                     else:
-                        flash("You have already rated this once. You cannot rate agin")
+                        flash("You have already rated this once. You cannot rate again")
                     #print schoolinfo2.find_one({'_id':code})
                     return redirect(url_for("school", code=code))
 
