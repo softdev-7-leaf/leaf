@@ -154,7 +154,6 @@ def add_user(username, password, emailaddress, gender, month, day, year) : #, ag
 @app.route("/register",methods=["GET","POST"])
 def register():
 	if request.method=="GET":
-		flash("Password requirements: The length must be greater than 4 and less than 20, and have at least one digit, one uppercase letter and one lowercase letter.")
                 m = []
                 for x in range(1,13):
                     m.append(x)
