@@ -127,6 +127,9 @@ def login():
                         session['password'] = password
                         session['gender'] = user['gender']
                         session['emailaddress'] = user['emailaddress']
+                        session['month'] = user['month']
+                        session['day'] = user['day']
+                        session['year'] = user['year']
                         if user['first'] == 0:
                             return redirect(url_for('profile'))
                         return redirect(url_for('user_home', username=username))
@@ -135,11 +138,14 @@ def login():
 				#return redirect(url_for('user_home', username=username))
 		else: 
                     return redirect(url_for('register'))
-def add_user(username, password, emailaddress, gender) : #, age
+def add_user(username, password, emailaddress, gender, month, day, year) : #, age
     user = {'username' : username, 
                         'password' : password,
                         'emailaddress' : emailaddress,
                         'gender' : gender,
+                        'month' : month,
+                        'day' : day,
+                        'year' : year,
                         'first' : 0,
                         #'age' : age
                         }
@@ -166,6 +172,9 @@ def register():
         	password = request.form["password"]
 		password2 = request.form["password2"]
 		gender = request.form["gender"]
+                month = request.form["month"]
+                day = request.form["day"]
+                year = request.form["year"]
         	emailaddress = request.form["emailaddress"]
 		if users.find_one({'username': username}) != None:
 			flash("The username you submitted is already taken, please try again.")
@@ -182,7 +191,7 @@ def register():
 		if not validate_password(str(password)):
 			flash("The password does not meet the requirements: The length must be greater than 4 and less than 20, and have at least one digit, one uppercase letter and one lowercase letter.")
 			return redirect(url_for('register'))
-		add_user(username, password, emailaddress, gender) #, age
+		add_user(username, password, emailaddress, gender, month, day, year) #, age
 		flash("You've sucessfully registered, now login!")
 		return redirect(url_for('login'))
 
@@ -316,7 +325,8 @@ def editprofile():
     	    if button=="edit":
                 user = users.find_one({'username': session['username']})
                 emailaddress = request.form['emailaddress']
-                if users.find_one({'emailaddress': emailaddress}) != None:
+                gender = request.form['gender']
+                if users.find_one({'emailaddress': emailaddress}) != None and not session['emailaddress'] == emailaddress:
                     flash("The email you submitted already has an account tied to it, please try again.")
                     return redirect(url_for('editprofile'))
                 if not validate_email(str(emailaddress)):
@@ -326,11 +336,15 @@ def editprofile():
                         'username' : session['username'], 
                         'password' : session['password'],
                         'emailaddress' : emailaddress,
-                        'gender' : session['gender'],
+                        'gender' : gender,
                         'first' : 1,
+                        'month' : session['month'],
+                        'day' : session['day'],
+                        'year' : session['year'],
                         #'age' : age
                         })
                 session['emailaddress'] = emailaddress
+                session['gender'] = gender
                 session['first'] = 1
                 return redirect(url_for("profile"))
         if 'pwchange' in request.form:
@@ -365,7 +379,7 @@ def editprofile():
 @app.route("/profile", methods=["GET","POST"])
 def profile():
     if request.method=="GET":
-        return render_template("profile.html",username= session['username'],emailaddress= session['emailaddress'], gender = session['gender'])
+        return render_template("profile.html",username= session['username'],emailaddress= session['emailaddress'], gender = session['gender'], month = session['month'], day = session['day'], year = session['year'])
     else:
         if 'edit' in request.form:
             button = request.form['edit']
