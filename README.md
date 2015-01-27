@@ -2,7 +2,7 @@
 
 Tianshi Wang: Open Data Analysis (Leader) Github manager<br>
 Brian Guo: Code Supervisor (Back End) <br>
-Chris Kim: Communication and Issues Manager (Back End)<br>
+Chris Kim: Communication and Issues Manager and Coder (Back End)<br>
 David Liang: Javascript and HTML (Front End)<br>
 
 Tools:
