@@ -260,8 +260,8 @@ def school(code = None):
                     rating = request.form['rating']
                     #print "THIS IS THE RATING"
                     #print rating
-                    #if not code in ratedschools:
-                    if 'rating' in schoolinfo2.find_one({"_id":code}):
+                    if not code in ratedschools:
+                        if 'rating' in schoolinfo2.find_one({"_id":code}):
                             currentratings=schoolinfo2.find_one({"_id":code})['rating']
                         #print currentratings
                         #print rating
@@ -270,13 +270,13 @@ def school(code = None):
                             schoolinfo2.update({"_id":code},{"$set": {"rating": currentratings}})
                             ratedschools.append(code)
                         #print schoolinfo2.find_one({"_id":code})['rating']
-                    else:
+                        else:
                             newarray=[]
                             newarray.append(rating)
                             schoolinfo2.update({"_id":code},{"$set":{"rating":newarray}})
                             ratedschools.append(code)
-                    #else:
-                        #flash("You have already rated this once. You cannot rate agin")
+                    else:
+                        flash("You have already rated this once. You cannot rate agin")
                     #print schoolinfo2.find_one({'_id':code})
                     return redirect(url_for("school", code=code))
 
