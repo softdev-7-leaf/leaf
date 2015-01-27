@@ -56,6 +56,7 @@ def validate_email(email):
         return False
     else:
         return True
+
 def upper(password):
     uppers = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     for p in password:
@@ -132,7 +133,16 @@ def add_user(username, password, emailaddress, gender) : #, age
 def register():
 	if request.method=="GET":
 		flash("Password requirements: The length must be greater than 4 and less than 20, and have at least one digit, one uppercase letter and one lowercase letter.")
-                return render_template("register.html")
+                m = []
+                for x in range(1,13):
+                    m.append(x)
+                d = []
+                for x in range(1,32):
+                    d.append(x)
+                y = []
+                for x in range(1,97):
+                    y.append(x + 1919)
+                return render_template("register.html", m=m, d=d, y=y)
 	else: 
         	button = request.form["b"]
 		if button == "Login":

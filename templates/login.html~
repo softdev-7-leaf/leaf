@@ -2,13 +2,8 @@
 <html lang="en">
   <head>
     <title>Login Page</title>
-    
-    <!-- Bootstrap Core CSS -->
-    <link href="../static/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Signin CSS -->
-    <link rel="stylesheet" href="../static/signin.css">
-    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/signin.css">
     <style>
       .form-signin input[type="password"] {
       margin-bottom: 10px;
@@ -22,8 +17,6 @@
       <form class="form-signin" role="form" method="POST">
 	<h1 class="form-signin-heading">Log in</h1>
 	<hr>
-
-	<!-- Flashed messages -->
 	{% with messages = get_flashed_messages() %}
 	{% if messages %}
 	<div class="alert alert-info">
@@ -33,21 +26,17 @@
 	{% endwith %}
 	{% block body %}
 	{% endblock %}
-
-	<!-- Username -->
 	<input type="text" class="form-control" name="username" placeholder = "Username" autofocus>
 	<br>
-	
-	<!-- Password -->
 	<input type="password" class="form-control" name="password" placeholder = "Password">
 	<br>
 	<br>
-
-	<!-- Login button -->
+	<br>
+	<br>
+	<br>
+	<br>
 	<button class="btn btn-lg btn-success btn-block" type="submit" name="b" value="Login">Login</button>
 	<br>
-	
-	<!-- Go to register -->
 	Create an account:
 	<button class="btn btn-lg btn-default btn-block" type="submit" name="b" value="Register">Register</button>
       </form>

@@ -2,13 +2,8 @@
 <html lang="en">
   <head>
     <title>Signup Page</title>
-    
-    <!-- Bootstrap Core CSS -->
-    <link href="../static/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Signin CSS -->
-    <link rel="stylesheet" href="../static/signin.css">
-    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/signin.css">
     <style>
       .form-signin input[type="password"] {
       margin-bottom: 10px;
@@ -25,81 +20,40 @@
       <form class="form-signin" role="form" method="POST">
 	<h1 class="form-signin-heading">Sign up</h1>
 	<hr>
-
-	<!-- Flashed messages -->
 	{% with messages = get_flashed_messages() %}
 	{% if messages %}
-	<!-- {% for message in messages %} -->
+	{% for message in messages %}
 	<div class="alert alert-info">
-	  {{messages[0]}}
+	  {{message}}
 	</div>
-	<!-- {% endfor %} -->
+	{% endfor %}
 	{% endif %}
 	{% endwith %}
-
-	<!-- Username -->
 	<input type="text" class="form-control" name="username" placeholder = "Username" autofocus>
 	<br>
-
-	<!-- Password -->
 	<input type="password" class="form-control" name="password" placeholder = "Password">
 	<br>
-
-	<!-- Re-enter password -->
 	<input type="password" class="form-control" name="password2" placeholder = "Re-enter Password">
 	<br>
-
-	<!-- Email address -->
 	<input type="text" class="form-control" name="emailaddress" placeholder = "Email Address">
 	<br>
-
-	<!-- Gender -->
-	<b> Gender: </b>
+	Gender:
 	<select id="genders" class="form-control" name="gender">
 	  <option value = "male"> Male </option>
 	  <option value = "female"> Female </option>
 	</select>
 	<br>
-	
-	<!-- Birthday -->
-	<b> Birthday: </b>
-	<br>
-	<br>
-
-	<!-- Month -->
-	Month:
-	<select id="months" class="form-control" name="month">
-	  {% for ms in m %}
-	  <option value={{ms}}> {{ms}} </option>
-	  {% endfor %}
-	</select>
-	<br>
-	
-	<!-- Day -->
-	Day:
-	<select id="days" class="form-control" name="day">
-	  {% for ds in d %}
-	  <option value={{ds}}> {{ds}} </option>
-	  {% endfor %}
-	</select>
-	<br>
-
-	<!-- Year -->
-	Year:
-	<select id="years" class="form-control" name="year">
-	  {% for ys in y %}
-	  <option value={{ys}}> {{ys}} </option>
+	Age:
+	<select id="ages" class="form-control" name="age">
+	  {% for ages in a %}
+	  <option value={{ages}}> {{ages}} </option>
 	  {% endfor %}
 	</select>
 	<br>
 	<br>
 	<br>
-
-	<!-- Register button -->
 	<button class="btn btn-lg btn-primary btn-block" type="submit" name="b" value="Register">Register</button>
 	<br>
-
-	<!-- Back to login button -->
 	Go back to log in:
 	<button class="btn btn-lg btn-default btn-block" type="submit" name="b" value="Login">Login</button>
       </form>
