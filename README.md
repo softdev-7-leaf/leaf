@@ -1,14 +1,14 @@
 # leaf
 
-Tianshi Wang: Open Data Analysis (Leader) Github manager<br>
-Brian Guo: Code Supervisor (Back End) <br>
-Chris Kim: Coder, Issues Manager, Communications, Coder (Back End)<br>
-David Liang: Javascript and HTML (Front End)<br>
+Tianshi Wang: Open Data Analysis (Github manager and leader, owner of droplet) <br>
+Brian Guo: Code Supervisor (API back end, owner of server) <br>
+Chris Kim: Coder, Issues Manager, Communications(Login and register back end, owner of domain)<br>
+David Liang: daVid (Javascript and HTML front end)<br>
 
 Tools:
-Python CSS Flask Javascript API Mongo
+Python HTML CSS Flask Javascript API Mongo
 
-<b>leaf! The niche for NYC public high schools. Register and log in with your account to explore high school trees. You can rate, review, and add yourself as a leaf to a tree! </b>
+<b>leaf! The niche for NYC public high schools. Register and log in with your account to explore high schools. You can view public school information, and rate high schools! </b>
 
 The project uses open data from the Socrata Open Data API, and combines different statistics about every school.
 
