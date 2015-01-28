@@ -78,18 +78,21 @@
 	      <br>
 	      <br>
 	      <b> Reviews </b> : <br>
-	      Overall Grade:
-	      | {{overallgrade}}
-	      <br>
-	      Principal:
-	      | {{principal}}
+	      Overall Grade: {% for x in overallgrade %}
+	      | {{x}}
 	      {% endfor %}
 	      <br>
-	      District:
-	      | {{district}}
+	      Principal: {% for x in principal %}
+	      | {{x}}
+	      {% endfor %}
 	      <br>
-	      Environment Grade:
-	      | {{environment}}
+	      District: {% for x in district %}
+	      | {{x}}
+	      {% endfor %}
+	      <br>
+	      Environment Grade: {% for x in environment %}
+	      | {{x}}
+	      {% endfor %}
 	      <br>
 	      Total AP Exams Taken: {% for x in apexams %}
 	      | {{x}}
