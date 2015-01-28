@@ -70,21 +70,25 @@
 		</div><!--/.container -->
 	      </nav>
 	      <h1> {% for x in name %} {{x}} {% endfor %} ({{dbn}})</h1> 
-	      <hr>
+	      <br>
 	      Programs: 
 	      {% for x in program_code %}
 	      | {{x}} 
 	      {% endfor %}
 	      <br>
 	      <br>
-	      <b> Reviews </b> : <br>
-	      Overall Grade: {% for x in overallgrade %}
-	      | {{x}}
-	      {% endfor %}
-	      <br>
 	      Principal: {% for x in principal %}
 	      | {{x}}
 	      {% endfor %}
+	      <br>
+	      Interest Area: {% for x in Interest %}
+	      | {{x}} 
+	      {% endfor %}
+	      <br>
+	      <hr>
+	      OVERALL GRADE: <b>{% for x in overallgrade %}
+	      | {{x}}
+	      {% endfor %}</b>
 	      <br>
 	      District: {% for x in district %}
 	      | {{x}}
@@ -93,7 +97,7 @@
 	      Environment Grade: {% for x in environment %}
 	      | {{x}}
 	      {% endfor %}
-	      <br>
+	      <br><hr>
 	      Total AP Exams Taken: {% for x in apexams %}
 	      | {{x}}
 	      {% endfor %}
@@ -110,10 +114,6 @@
 	      | {{x}} 
 	      {% endfor %}
 	      <br>
-	      Interest Area: {% for x in Interest %}
-	      | {{x}} 
-	      {% endfor %}
-	      <br>
 	  	<!-- Flashed messages -->
 	  	{% with messages = get_flashed_messages() %}
 	  	{% if messages %}
@@ -123,11 +123,11 @@
 	  	</div>
 	  	<!-- {% endfor %} -->
 	  	{% endif %}
-	  	{% endwith %}
-	      Average Rating: | {{rating}}
-	      <hr>
+	  	{% endwith %}<hr>
+	      <h3>Average Rating: | {{rating}}</h3>
+
 	      <form method="POST">
-		Rating:
+		Give this school a rating!:
 		<select name="rating">
 		  <option value="0"> 0 </option>
 		  <option value="0.5"> 0.5 </option>
