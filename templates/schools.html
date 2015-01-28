@@ -69,8 +69,6 @@
 		  </div><!--/.nav-collapse -->
 		</div><!--/.container -->
 	      </nav>
-	      <br>
-	      <br>
 	      <h1> {{name}} ({{dbn}})</h1> 
 	      <hr>
 	      Programs: 
@@ -80,21 +78,18 @@
 	      <br>
 	      <br>
 	      <b> Reviews </b> : <br>
-	      Overall Grade: {% for x in overallgrade %}
-	      | {{x}}
+	      Overall Grade:
+	      | {{overallgrade}}
+	      <br>
+	      Principal:
+	      | {{principal}}
 	      {% endfor %}
 	      <br>
-	      Principal: {% for x in principal %}
-	      | {{x}}
-	      {% endfor %}
+	      District:
+	      | {{district}}
 	      <br>
-	      District: {% for x in district %}
-	      | {{x}}
-	      {% endfor %}
-	      <br>
-	      Environment Grade: {% for x in environment %}
-	      | {{x}}
-	      {% endfor %}
+	      Environment Grade:
+	      | {{environment}}
 	      <br>
 	      Total AP Exams Taken: {% for x in apexams %}
 	      | {{x}}
