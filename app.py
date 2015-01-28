@@ -11,15 +11,15 @@ from pymongo import Connection
 app=Flask(__name__)
 #abc
 app.config['SECRET_KEY'] = "A0Zr98j/3yX R~XHH!jmN]LWX/,?RT"
-abc = urllib2.Request("https://data.cityofnewyork.us/resource/mreg-rk5p.json")
-sat = urllib2.Request("https://data.cityofnewyork.us/resource/zt9s-n5aj.json")
-text = urlopen(abc)
-sattext = urlopen(sat)
-text2 = text.read()
-sattext2 = sattext.read()
-schoolslist = json.loads(text2)
-schoolslist2 = json.loads(sattext2)
-dbn_codes = []
+#abc = urllib2.Request("https://data.cityofnewyork.us/resource/mreg-rk5p.json")
+#sat = urllib2.Request("https://data.cityofnewyork.us/resource/zt9s-n5aj.json")
+#text = urlopen(abc)
+#sattext = urlopen(sat)
+#text2 = text.read()
+#sattext2 = sattext.read()
+#schoolslist = json.loads(text2)
+#schoolslist2 = json.loads(sattext2)
+#dbn_codes = []
 c= Connection()
 client = MongoClient()
 db = client.leaf
@@ -27,11 +27,44 @@ c.drop_database(db)
 users = db.users
 schoolinfo=db.one
 ratedschools={}
-schoolinfo.insert(schoolslist)
-schoolinfo.insert(schoolslist2)
+#schoolinfo.insert(schoolslist)
+#schoolinfo.insert(schoolslist2)
+
+#schoolinfo.group(key={"dbn":1},
+schoolinfo2 = db.two
+graduationrate = db.three
+#schoolinfo2.insert(shortened['result'])
+#for a in schoolslist:
+#        dbn_codes.append(a['dbn'])
+
+def database_store(link,datab):
+    a = urllib2.Request(link)
+    b = urlopen(a)
+    c = b.read()
+    d = json.loads(c)
+    datab.insert(d)
+
+database_store("https://data.cityofnewyork.us/resource/mreg-rk5p.json",schoolinfo)
+database_store("https://data.cityofnewyork.us/resource/zt9s-n5aj.json",schoolinfo)
+database_store("https://data.cityofnewyork.us/resource/ffnc-f3aa.json",graduationrate)
+database_store("https://data.cityofnewyork.us/resource/itfs-ms3e.json",schoolinfo)
+
+graduationrate2 = graduationrate.aggregate([{"$match": 
+    {"school_level_" : "High School"}}])
+
+
+#graduationrate3 = graduationrate.aggregate([{"$match":
+#    {"school_level_": "High School Transfer"}}])
+
+schoolinfo.insert(graduationrate2['result'])
+#schoolinfo.insert(graduationrate3['result'])
+
+
+
 shortened = schoolinfo.aggregate([{"$group": {
         "_id": "$dbn",
-        "printed_school_name": {"$first": "$printed_school_name"},
+        "printed_school_name": {"$addToSet": "$school"},
+        "schoolname2": {"$addToSet": "$printed_school_name"},
         "program_name": {"$addToSet": "$program_name"},
         "program_code": {"$addToSet": "$program_code"},
         "directory_page_": {"$first": "$directory_page_"},
@@ -40,14 +73,17 @@ shortened = schoolinfo.aggregate([{"$group": {
         "writing_mean": {"$addToSet": "$writing_mean"},
         "critical_reading_mean": {"$addToSet": "$critical_reading_mean"},
         "mathematics_mean": {"$addToSet": "$mathematics_mean"},
-        "number_of_test_takers": {"$addToSet": "$number_of_test_takers"}
+        "number_of_test_takers": {"$addToSet": "$number_of_test_takers"},
+        "3s4s5s": {"$addToSet": "$number_of_exams_with_scores_3_4_or_5"},
+        "totalAPexams": {"$addToSet": "$total_exams_taken"},
+        "totalTakers": {"$addToSet": "$ap_test_takers_"},
+        "overall_grade": {"$addToSet": "$_overall_grade"},
+        "principal" : {"$addToSet": "$principal"},
+        "district" :{"$addToSet": "$district"},
+        "environment_grade": {"$addToSet": "$_environment_grade"}
         }}])
-#schoolinfo.group(key={"dbn":1},
-schoolinfo2 = db.two
-schoolinfo2.insert(shortened['result'])
-#for a in schoolslist:
-#        dbn_codes.append(a['dbn'])
 
+schoolinfo2.insert(shortened['result'])
 
 #highschools= urlopen(request)
 #response = highschools.read()
@@ -231,7 +267,7 @@ def user_home(username=None):
 def school(code = None):
         if request.method == "GET":
                 #print "YES!"  
-                #print schoolinfo.find_one({"dbn": code})
+                print schoolinfo2.find_one({"_id": code})
                 a = schoolinfo2.find_one({"_id": code})
                 #print schoolinfo2     
                 if a != None:
@@ -247,7 +283,11 @@ def school(code = None):
                         #name = schoolslist[n]['printed_school_name']
                         #program_code = schoolslist[n]['program_code']
                         #print rating
-                        return render_template('schools.html',name=a['printed_school_name'], 
+                        if len(a['printed_school_name']) == 0:
+                            name = a['schoolname2']
+                        else:
+                            name = a['printed_school_name']
+                        return render_template('schools.html',name=name, 
                                 dbn=a['_id'], 
                                 program_code=a['program_name'],
                                 critread=a['critical_reading_mean'],
@@ -255,7 +295,13 @@ def school(code = None):
                                 writing= a['writing_mean'],
                                 Interest= a['interest_area'],
                                 username=session['username'],
-                                rating=rating) #program_code=program_code, dbn=dbn)
+                                rating=rating,
+                                overallgrade=a['overall_grade'],
+                                environment=a['environment_grade'],
+                                principal=a['principal'],
+                                district=a['district'],
+                                apexams=a['totalAPexams']
+                                ) #program_code=program_code, dbn=dbn)
         else: 
                 if 'searchbar' in request.form:
                     field = request.form['searchbar']
@@ -306,7 +352,10 @@ def search(results=None):
                 {"urls":{"$regex": regx}},
                 {"borough":{"$regex": regx}},
                 {"selection_method":{"$regex": regx}},
-                {"program_name":{"$regex": regx}}]})
+                {"program_name":{"$regex": regx}},
+                {"principal": {"$regex": regx}},
+                {"interest_area": {"$regex": regx}}
+                ]})
         for x in n:
                 if not (x in results):
                         results.append(x)
