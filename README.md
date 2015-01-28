@@ -1,5 +1,8 @@
 # leaf
 
+CHECK OUT THE VIDEO HERE!<br>
+http://youtu.be/0QLmSTyrccU
+
 Tianshi Wang: Open Data Analysis (Github manager and leader, owner of droplet) <br>
 Brian Guo: Code Supervisor (API back end, owner of server) <br>
 Chris Kim: Coder, Issues Manager, Communications(Login and register back end, Profile coding and editting, owner of domain)<br>
