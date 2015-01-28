@@ -46,7 +46,7 @@
 	    </div>
 	    <div class="push">
               <ul>{% for x in results %}
-		<li> <a href="/school/{{x['_id']}}"> {{x["printed_school_name"]}}</a></li>
+		<li> <a href="/school/{{x['_id']}}"> {% if x["printed_school_name"][0] != undefined %} {{x["printed_school_name"][0]}} {% else %} {{ x["schoolname2"][0]}} {% endif %}</a></li>
 		{% endfor %}
               </ul>
 	      <div class="push"></div>
