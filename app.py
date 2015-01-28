@@ -346,6 +346,7 @@ def search(results=None):
         regx = re.compile(fieldstring, re.IGNORECASE)
         n = schoolinfo2.find({ "$or": [
                 {"printed_school_name": {"$regex": regx}},
+                {"schoolname2": {"$regex": regx}},
                 {"program_code":{"$regex": regx}},
                 {"directory_page_":{"$regex": regx}},
                 {"dbn":{"$regex": regx}},
