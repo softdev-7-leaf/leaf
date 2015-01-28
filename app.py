@@ -9,6 +9,7 @@ from pymongo import Connection
 
 
 app=Flask(__name__)
+#abc
 app.config['SECRET_KEY'] = "A0Zr98j/3yX R~XHH!jmN]LWX/,?RT"
 abc = urllib2.Request("https://data.cityofnewyork.us/resource/mreg-rk5p.json")
 sat = urllib2.Request("https://data.cityofnewyork.us/resource/zt9s-n5aj.json")
