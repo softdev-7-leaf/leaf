@@ -132,8 +132,9 @@ def login():
                         session['month'] = user['month']
                         session['day'] = user['day']
                         session['year'] = user['year']
+                        print ratedschools
                         if username not in ratedschools:
-                            ratedschools['username'] = []
+                            ratedschools['%s' % username] = []
                         if user['first'] == 0:
                             return redirect(url_for('profile'))
                         return redirect(url_for('user_home', username=username))
@@ -211,7 +212,7 @@ def logout():
 def user_home(username=None):
     if request.method == "GET":
         session['username'] = username
-        print session['username']
+        #print session['username']
         session.modified=True
         return render_template("home.html", username=username)
     else:
@@ -220,8 +221,8 @@ def user_home(username=None):
     	    if button=="Logout":
                     return redirect(url_for("logout"))
         value = request.form['q']
-        print "this is the value"
-        print value
+        #print "this is the value"
+        #print value
         return redirect(url_for("search",field=value))
 
 
@@ -263,7 +264,7 @@ def school(code = None):
                     #print "THIS IS THE RATING"
                     #print rating
                     username = session['username']
-                    if not code in ratedschools['username']:
+                    if not code in ratedschools['%s' % session['username']]:
                         if 'rating' in schoolinfo2.find_one({"_id":code}):
                             currentratings=schoolinfo2.find_one({"_id":code})['rating']
                         #print currentratings
@@ -271,13 +272,13 @@ def school(code = None):
                             currentratings.append(rating)
                         #print currentratings
                             schoolinfo2.update({"_id":code},{"$set": {"rating": currentratings}})
-                            ratedschools['username'].append(code)
+                            ratedschools['%s'% session['username']].append(code)
                         #print schoolinfo2.find_one({"_id":code})['rating']
                         else:
                             newarray=[]
                             newarray.append(rating)
                             schoolinfo2.update({"_id":code},{"$set":{"rating":newarray}})
-                            ratedschools['username'].append(code)
+                            ratedschools['%s' % session ['username']].append(code)
                     else:
                         flash("You have already rated this once. You cannot rate again")
                     #print schoolinfo2.find_one({'_id':code})
