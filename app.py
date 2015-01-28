@@ -166,7 +166,7 @@ def register():
                 for x in range(1,32):
                     d.append(x)
                 y = []
-                for x in range(1,97):
+                for x in range(97,1,-1):
                     y.append(x + 1919)
                 return render_template("register.html", m=m, d=d, y=y)
 	else: 
