@@ -1,14 +1,14 @@
 # leaf
 
-Tianshi Wang: Open Data Analysis (Leader) Github manager<br>
-Brian Guo: Code Supervisor (Back End) <br>
-Chris Kim: Communication and Issues Manager and Coder (Back End)<br>
-David Liang: Javascript and HTML (Front End)<br>
+Tianshi Wang: Open Data Analysis (Github manager and leader, owner of droplet) <br>
+Brian Guo: Code Supervisor (API back end, owner of server) <br>
+Chris Kim: Coder, Issues Manager, Communications(Login and register back end, owner of domain)<br>
+David Liang: daVid (Javascript and HTML front end)<br>
 
 Tools:
-Python CSS Flask Javascript API Mongo
+Python HTML CSS Flask Javascript API Mongo
 
-<b>leaf! The niche for NYC public high schools. Register and log in with your account to explore high school trees. You can rate, review, and add yourself as a leaf to a tree! </b>
+<b>leaf! The niche for NYC public high schools. Register and log in with your account to explore high schools. You can view public school information, and rate high schools! </b>
 
 The project uses open data from the Socrata Open Data API, and combines different statistics about every school.
 
@@ -24,14 +24,9 @@ CONCEPT: NICHE/COLLEGE BOARD FOR NYC HIGH SCHOOLS (PRIVATE AND PUBLIC)
 
 1/25/15 - Brian made all search functions work. Each school now has an individual page. OpenData from different APIs are being compiled. Chris fixed the register, login, and logout.
 
-To Do List:
-Digital Ocean
-Video
-Password Hash
-Email Checking
-css formatting
-make profile pages
-make all pages look alike
-personal profile - contain personal info, like facebook, add high schools, rate high schools
+1/26/15 - Chris formatted the the email and password checks. David changed the appearance of the website using css. Brian created profile pages for users, as well as a rating system which allows each user to rate a high school once. Tyler created a contact us page, and formatted html across all templates. Chris also made it possible for users to edit their information.
 
-1/27/15 - Project is due!
+1/27/15 - Brian and Tyler created a droplet on DigitalOcean and installed all packages on the server. Chris and Tyler registered the domain name leafyouonseen.com on GoDaddy.com and linked it to the droplet. Credits to Chris for spending money on the project!
+
+1/28/15 - Project is complete and viewable on <a href="leafyouonseen.com">leafyouonseen.com</a><br>
+The youtube video has been made, but contains no audio, and will be updated shortly!

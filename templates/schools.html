@@ -69,9 +69,7 @@
 		  </div><!--/.nav-collapse -->
 		</div><!--/.container -->
 	      </nav>
-	      <br>
-	      <br>
-	      <h1> {{name}} ({{dbn}})</h1> 
+	      <h1> {% for x in name %} {{x}} {% endfor %} ({{dbn}})</h1> 
 	      <hr>
 	      Programs: 
 	      {% for x in program_code %}
@@ -79,7 +77,26 @@
 	      {% endfor %}
 	      <br>
 	      <br>
-	      <b> Reviews </b>
+	      <b> Reviews </b> : <br>
+	      Overall Grade: {% for x in overallgrade %}
+	      | {{x}}
+	      {% endfor %}
+	      <br>
+	      Principal: {% for x in principal %}
+	      | {{x}}
+	      {% endfor %}
+	      <br>
+	      District: {% for x in district %}
+	      | {{x}}
+	      {% endfor %}
+	      <br>
+	      Environment Grade: {% for x in environment %}
+	      | {{x}}
+	      {% endfor %}
+	      <br>
+	      Total AP Exams Taken: {% for x in apexams %}
+	      | {{x}}
+	      {% endfor %}
 	      <br>
 	      Critical Reading Average: {% for x in critread %}
 	      | {{x}} 
